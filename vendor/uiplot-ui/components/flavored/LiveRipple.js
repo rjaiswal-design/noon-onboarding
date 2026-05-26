@@ -1,0 +1,80 @@
+import { jsx, jsxs } from "react/jsx-runtime";
+function LiveRipple({ label = "LIVE", color = "var(--ub-success)" }) {
+  return /* @__PURE__ */ jsxs(
+    "span",
+    {
+      style: {
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        padding: "3px 9px 3px 6px",
+        color,
+        background: `color-mix(in srgb, ${color} 8%, transparent)`,
+        border: `1px solid color-mix(in srgb, ${color} 30%, transparent)`,
+        borderRadius: 999
+      },
+      children: [
+        /* @__PURE__ */ jsxs(
+          "span",
+          {
+            style: {
+              position: "relative",
+              width: 16,
+              height: 16,
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0
+            },
+            children: [
+              /* @__PURE__ */ jsx(
+                "span",
+                {
+                  style: {
+                    position: "absolute",
+                    width: 6,
+                    height: 6,
+                    borderRadius: "50%",
+                    background: color,
+                    animation: "ub-ripple 1.6s ease-out infinite"
+                  }
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "span",
+                {
+                  style: {
+                    position: "absolute",
+                    width: 6,
+                    height: 6,
+                    borderRadius: "50%",
+                    background: color,
+                    animation: "ub-ripple 1.6s ease-out 0.6s infinite"
+                  }
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "span",
+                {
+                  style: {
+                    width: 6,
+                    height: 6,
+                    borderRadius: "50%",
+                    background: color,
+                    position: "relative",
+                    zIndex: 1
+                  }
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsx("span", { className: "ub-mono", style: { fontSize: 10, color }, children: label })
+      ]
+    }
+  );
+}
+export {
+  LiveRipple
+};
+//# sourceMappingURL=LiveRipple.js.map
