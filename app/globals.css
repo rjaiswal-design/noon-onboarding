@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@500;700;800&family=Inter:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 @import "@uiplot/ui/tokens.css";
 @import "tailwindcss";
 
@@ -8,32 +8,99 @@ html, body {
   background-color: var(--ub-bg);
 }
 body {
-  color: var(--ub-fg);
-  font-family: var(--ub-font-body);
+  color: var(--ub-fg-muted);
+  font-family: var(--ub-font-mono);
+  font-size: 14px;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
 }
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: radial-gradient(circle, rgba(240, 240, 240, 0.14) 1.2px, transparent 1.2px);
-  background-size: 24px 24px;
-}
-body > * {
-  position: relative;
-  z-index: 1;
-}
 
 ::selection { background: var(--ub-accent-12); color: var(--ub-fg-strong); }
 
-.ub-mono {
-  font-family: var(--ub-font-mono);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  font-size: 10px;
+/* ── documentation primitives ─────────────────────────── */
+
+.doc {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 28px 160px;
+}
+
+.doc a {
+  color: var(--ub-fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ub-border-strong);
+  transition: color 0.12s ease, border-color 0.12s ease;
+}
+.doc a:hover {
+  color: var(--ub-accent);
+  border-color: var(--ub-accent);
+}
+
+.rule {
+  color: var(--ub-fg-secondary);
+  letter-spacing: 0.8em;
+  user-select: none;
+  margin: 40px 0;
+  font-size: 13px;
+}
+
+.eyebrow {
+  color: var(--ub-fg-mutedXX);
   text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.h-title {
+  color: var(--ub-fg-strong);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.h-sec {
+  color: var(--ub-fg);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.muted { color: var(--ub-fg-mutedXX); }
+.fg { color: var(--ub-fg); }
+.accent { color: var(--ub-accent); }
+
+/* module list rows */
+.mod-row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 11px 8px;
+  margin: 0 -8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+  text-decoration: none;
+  border: none;
+}
+.mod-row:hover {
+  background: var(--ub-surface);
+}
+.mod-row:hover .mod-name { color: var(--ub-accent); }
+.mod-num { color: var(--ub-fg-secondary); }
+.mod-name {
+  color: var(--ub-fg-strong);
+  font-weight: 500;
+  transition: color 0.12s ease;
+}
+.mod-when {
+  color: var(--ub-fg-mutedXX);
+  font-size: 12px;
+  white-space: nowrap;
 }
