@@ -28,11 +28,17 @@
 html, body {
   background-color: var(--ub-bg);
 }
+:root {
+  --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 body {
   color: var(--ub-fg-muted);
-  font-family: var(--ub-font-mono);
-  font-size: 14px;
-  line-height: 1.7;
+  font-family: var(--font-sf);
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
@@ -68,27 +74,28 @@ body {
 }
 
 .eyebrow {
+  font-family: var(--ub-font-mono);
   color: var(--ub-fg-mutedXX);
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   font-size: 11px;
   font-weight: 600;
 }
 
 .h-title {
   color: var(--ub-fg-strong);
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   margin: 0;
 }
 
 .h-sec {
-  color: var(--ub-fg);
-  font-size: 16px;
+  color: var(--ub-fg-strong);
+  font-size: 17px;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   margin: 0;
 }
 
@@ -114,13 +121,18 @@ body {
   background: var(--ub-surface);
 }
 .mod-row:hover .mod-name { color: var(--ub-accent); }
-.mod-num { color: var(--ub-fg-secondary); }
+.mod-num {
+  font-family: var(--ub-font-mono);
+  color: var(--ub-fg-secondary);
+  font-size: 13px;
+}
 .mod-name {
   color: var(--ub-fg-strong);
   font-weight: 500;
   transition: color 0.12s ease;
 }
 .mod-when {
+  font-family: var(--ub-font-mono);
   color: var(--ub-fg-mutedXX);
   font-size: 12px;
   white-space: nowrap;
