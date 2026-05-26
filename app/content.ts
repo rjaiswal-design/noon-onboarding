@@ -126,13 +126,13 @@ export const dependencies = [
   },
 ];
 
-export const owners = [
-  { name: "Ayaneshu", role: "Files · UI · case study" },
-  { name: "Tamanna", role: "Visual · case study" },
-  { name: "Saswata", role: "Motion · case study" },
-  { name: "Sid", role: "Case study" },
-  { name: "Design Lead", role: "Archetype session" },
-  { name: "POD seniors", role: "Research packs" },
-  { name: "Team lead", role: "Affinity conversations" },
-  { name: "Parallel program", role: "Events · PR · resources" },
-];
+export const ownerInitials: Record<string, string> = {
+  Ayaneshu: "AY",
+  Tamanna: "TA",
+  Sid: "SI",
+  Saswata: "SW",
+  "Design Lead": "DL",
+  "POD seniors": "PS",
+  "Team lead": "TL",
+  "Parallel program": "PP",
+};
