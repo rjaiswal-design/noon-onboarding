@@ -9,7 +9,7 @@ import {
   FocusParagraph,
   LiveRipple,
 } from "@uiplot/ui";
-import { themes, modules, week1, week2, principles, dependencies, owners } from "./content";
+import { themes, modules, principles, dependencies, owners } from "./content";
 
 export default function OnboardingPage() {
   return (
@@ -28,7 +28,6 @@ export default function OnboardingPage() {
       <Hero />
       <Themes />
       <Modules />
-      <Timeline />
       <Principles />
       <Dependencies />
       <Owners />
@@ -101,7 +100,7 @@ function Hero() {
           VIEW THE 7 MODULES →
         </Button>
         <Button size="lg" variant="outline">
-          DAY-BY-DAY PLAN
+          THE TWO PRINCIPLES
         </Button>
       </div>
 
@@ -118,9 +117,9 @@ function Hero() {
         {[
           { n: "07", l: "Modules across 4 themes" },
           { n: "04", l: "Designers featured in case studies" },
-          { n: "10", l: "Structured days · week 1 + 2" },
-        ].map((s) => (
-          <Card key={s.n} padded>
+          { n: "04", l: "PODs covered in research packs" },
+        ].map((s, i) => (
+          <Card key={i} padded>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               <span
                 style={{
@@ -249,107 +248,10 @@ function Modules() {
   );
 }
 
-function Timeline() {
-  return (
-    <section id="timeline" style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-      <SectionHeader number="03" eyebrow="TIMELINE" title="Day-by-day.">
-        A practical track. Use it to onboard each new joiner; tick items as they land.
-      </SectionHeader>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-        <Week label="WEEK 01" sub="FOUNDATIONS" days={week1} />
-        <Week label="WEEK 02" sub="IMMERSION" days={week2} />
-      </div>
-    </section>
-  );
-}
-
-function Week({
-  label,
-  sub,
-  days,
-}: {
-  label: string;
-  sub: string;
-  days: { day: string; items: string[] }[];
-}) {
-  return (
-    <Card padded>
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "baseline",
-            paddingBottom: 12,
-            borderBottom: "1px solid var(--ub-border)",
-          }}
-        >
-          <MonoLabel tone="accent" style={{ fontSize: 11 }}>
-            {label}
-          </MonoLabel>
-          <MonoLabel tone="muted" style={{ fontSize: 10 }}>
-            {sub}
-          </MonoLabel>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          {days.map((d, i) => (
-            <div key={d.day}>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "44px 1fr",
-                  gap: 14,
-                  alignItems: "start",
-                }}
-              >
-                <MonoLabel tone="muted" style={{ fontSize: 10, paddingTop: 2 }}>
-                  {d.day}
-                </MonoLabel>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                  {d.items.map((it) => (
-                    <div
-                      key={it}
-                      style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                        gap: 10,
-                        fontSize: 13,
-                        lineHeight: 1.55,
-                        color: "var(--ub-fg-soft)",
-                        fontWeight: 300,
-                      }}
-                    >
-                      <span
-                        style={{
-                          display: "inline-block",
-                          width: 10,
-                          height: 10,
-                          marginTop: 5,
-                          border: "1px solid var(--ub-border-strong)",
-                          borderRadius: 2,
-                          background: "var(--ub-bg-deep)",
-                          flexShrink: 0,
-                        }}
-                      />
-                      <span>{it}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              {i < days.length - 1 && <div style={{ height: 12 }} />}
-            </div>
-          ))}
-        </div>
-      </div>
-    </Card>
-  );
-}
-
 function Principles() {
   return (
     <section id="principles" style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-      <SectionHeader number="04" eyebrow="WHY" title="Two principles." />
+      <SectionHeader number="03" eyebrow="WHY" title="Two principles." />
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         {principles.map((p, i) => (
           <Card key={p.title} padded>
@@ -381,7 +283,7 @@ function Principles() {
 function Dependencies() {
   return (
     <section id="deps" style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-      <SectionHeader number="05" eyebrow="DEPENDENCIES" title="Parallel workstreams.">
+      <SectionHeader number="04" eyebrow="DEPENDENCIES" title="Parallel workstreams.">
         Three threads need to be built alongside this program for it to fully land.
       </SectionHeader>
       <Card padded>
@@ -436,7 +338,7 @@ function Dependencies() {
 function Owners() {
   return (
     <section id="owners" style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-      <SectionHeader number="06" eyebrow="PEOPLE" title="Owners." />
+      <SectionHeader number="05" eyebrow="PEOPLE" title="Owners." />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
         {owners.map((o) => (
           <Card key={o.name} padded>

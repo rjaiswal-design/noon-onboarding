@@ -97,22 +97,6 @@ export const modules: Module[] = [
   },
 ];
 
-export const week1 = [
-  { day: "D1", items: ["Figma access granted (Ayaneshu)", "Watch produced case study video #1", "Watch produced case study video #2"] },
-  { day: "D2", items: ["15-min Figma directory walkthrough", "Watch case study videos #3 and #4", "30-min live panel with Ayaneshu, Tamanna, Sid, Saswata"] },
-  { day: "D3", items: ["Read the archetype self-study doc (DS + archetype framework)"] },
-  { day: "D4", items: ["Live archetype session with Design Lead — examples, scenarios, Q&A"] },
-  { day: "D5", items: ["Place an order on noon, complete one full POD loop", "First conversation with team lead about the product experience"] },
-];
-
-export const week2 = [
-  { day: "D6", items: ["UI session with Ayaneshu", "Begin UI deliverable"] },
-  { day: "D7", items: ["Visual session with Tamanna", "Begin visual deliverable", "Start deep-read of assigned POD resource pack"] },
-  { day: "D8", items: ["Motion session with Saswata", "Begin motion deliverable", "Continue POD resource pack"] },
-  { day: "D9", items: ["Light-touch scan of the other three POD resource packs", "Review UI / visual / motion deliverables with session owners"] },
-  { day: "D10", items: ["Attend any offline event happening this week", "Second conversation with team lead — what clicked, what hasn’t", "Soft hand-off into POD work"] },
-];
-
 export const principles = [
   {
     title: "Affinity for product and craft is built, not assigned.",
