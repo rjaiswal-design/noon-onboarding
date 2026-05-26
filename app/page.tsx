@@ -14,24 +14,32 @@ export default function OnboardingPage() {
       >
         <a href="#modules">[ Index ]</a>
         <span className="muted" style={{ fontSize: 12 }}>
-          noon / design
+          Rahul Jaiswal · noon
         </span>
       </div>
 
       {/* header */}
-      <span className="eyebrow">Onboarding · Designers</span>
+      <span className="eyebrow">A note from Rahul · Designer onboarding</span>
       <h1 className="h-title" style={{ marginTop: 12 }}>
-        noon design — onboarding
+        Hey — this is Rahul.
       </h1>
       <p className="muted" style={{ margin: "6px 0 0", fontSize: 13 }}>
-        27 May, 2026 · v1 · living document
+        Joined noon 3 March, 2025 · written for whoever joins next
       </p>
 
       <p style={{ marginTop: 28 }}>
-        The first two weeks for any new designer joining noon. Not a product tour
-        — enough <span className="fg">context, language, exposure,</span> and
-        belonging that they can start contributing with confidence by the end of
-        week 2. Seven modules, four themes, two principles.
+        I joined noon on <span className="fg">3 March, 2025</span>, and I&apos;m
+        on a mission to make noon the <span className="fg">best commerce app
+        from a consumer&apos;s point of view</span>. Before you join the squad
+        that <span className="fg">Ayush and I</span> have built, I want to give
+        you some highlights of how we go about it.
+      </p>
+
+      <p style={{ marginTop: 16 }}>
+        This is the first two weeks for any new designer here — not a product
+        tour, but enough context, language, exposure, and belonging to start
+        contributing with confidence by the end of week 2. Seven modules, four
+        themes, two principles.
       </p>
 
       <Rule />
@@ -157,10 +165,10 @@ export default function OnboardingPage() {
       {/* footer */}
       <footer className="muted" style={{ fontSize: 12 }}>
         <p style={{ margin: 0 }}>
+          Written by <span className="fg">Rahul Jaiswal</span>. Module owners:
+          Ayaneshu, Tamanna, Saswata, Sid, design + team leads, POD seniors.
           Built on the{" "}
           <a href="https://github.com/rjaiswal-design/plot-ui">Plot UI kit</a>.
-          Owners: Ayaneshu, Tamanna, Saswata, Sid, design + team leads, POD
-          seniors.
         </p>
         <p style={{ margin: "8px 0 0" }}>noon / design / onboarding — document v1</p>
       </footer>

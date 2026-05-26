@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "noon design — onboarding",
+  title: "noon design — onboarding · a note from Rahul",
   description:
-    "Two weeks for new designers joining noon — context, language, exposure, belonging. Built on the Plot UI kit.",
+    "Hey, this is Rahul. A note for whoever joins the squad next — the first two weeks at noon, and how we go about making it the best commerce app from a consumer's point of view.",
+  authors: [{ name: "Rahul Jaiswal" }],
 };
 
 export default function RootLayout({
