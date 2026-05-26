@@ -3,7 +3,7 @@ import { principles } from "../content";
 import { Rule, TopBar, SiteFooter } from "../_components";
 
 export const metadata: Metadata = {
-  title: "Two principles — noon onboarding",
+  title: "Two principles · noon onboarding",
   description: "The two ideas the seven modules are all serving.",
 };
 

@@ -47,7 +47,7 @@ export function SiteFooter() {
         <a href="https://github.com/rjaiswal-design/plot-ui">Plot UI kit</a>.
       </p>
       <p style={{ margin: "8px 0 0" }}>
-        noon / design / onboarding — document v1
+        noon / design / onboarding · document v1
       </p>
     </footer>
   );

@@ -10,7 +10,7 @@ export default function IndexPage() {
       {/* header */}
       <span className="eyebrow">A note from Rahul · Designer onboarding</span>
       <h1 className="h-title" style={{ marginTop: 12 }}>
-        Hey — this is Rahul.
+        Hey, this is Rahul.
       </h1>
       <p className="muted" style={{ margin: "6px 0 0", fontSize: 13 }}>
         Joined noon 3 March, 2025 · written for whoever joins next
@@ -26,7 +26,7 @@ export default function IndexPage() {
       </p>
 
       <p style={{ marginTop: 16 }}>
-        This is the first two weeks for any new designer here — not a product
+        This is the first two weeks for any new designer here. Not a product
         tour, but enough context, language, exposure, and belonging to start
         contributing with confidence by the end of week 2. Seven modules, four
         themes, two principles.
@@ -34,7 +34,7 @@ export default function IndexPage() {
 
       <Rule />
 
-      {/* the fold — 7 modules, each its own page */}
+      {/* the fold: 7 modules, each its own page */}
       <section id="modules">
         <div
           style={{

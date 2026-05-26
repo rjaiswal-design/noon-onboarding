@@ -65,15 +65,18 @@ body {
   border-color: var(--ub-accent);
 }
 
-/* structural links — no underline */
+/* structural links: mono, no underline */
 .doc a.plain {
+  font-family: var(--ub-font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
   border-bottom: none;
 }
 .doc a.plain:hover {
   color: var(--ub-accent);
 }
 
-/* inline emphasis — accent */
+/* inline emphasis: accent */
 .em {
   color: var(--ub-accent);
   font-weight: 500;
@@ -97,19 +100,21 @@ body {
 }
 
 .h-title {
+  font-family: var(--ub-font-mono);
   color: var(--ub-fg-strong);
-  font-size: 32px;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
   margin: 0;
 }
 
 .h-sec {
+  font-family: var(--ub-font-mono);
   color: var(--ub-fg-strong);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   margin: 0;
 }
 
@@ -141,6 +146,8 @@ body {
   font-size: 13px;
 }
 .mod-name {
+  font-family: var(--ub-font-mono);
+  font-size: 14px;
   color: var(--ub-fg-strong);
   font-weight: 500;
   transition: color 0.12s ease;

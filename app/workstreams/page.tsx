@@ -3,7 +3,7 @@ import { dependencies } from "../content";
 import { Rule, TopBar, SiteFooter } from "../_components";
 
 export const metadata: Metadata = {
-  title: "Parallel workstreams — noon onboarding",
+  title: "Parallel workstreams · noon onboarding",
   description: "Three threads that need to be built alongside the program.",
 };
 

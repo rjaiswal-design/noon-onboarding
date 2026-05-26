@@ -17,7 +17,7 @@ export async function generateMetadata({
   const m = getModule(slug);
   if (!m) return { title: "Not found · noon onboarding" };
   return {
-    title: `${m.num} · ${m.title} — noon onboarding`,
+    title: `${m.num} · ${m.title} · noon onboarding`,
     description: m.summary,
   };
 }
