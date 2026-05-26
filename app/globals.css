@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 @import "@uiplot/ui/tokens.css";
 @import "tailwindcss";
 
@@ -30,7 +30,7 @@ html, body {
 }
 :root {
   --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
-    "Helvetica Neue", Helvetica, Arial, sans-serif;
+    "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -63,6 +63,20 @@ body {
 .doc a:hover {
   color: var(--ub-accent);
   border-color: var(--ub-accent);
+}
+
+/* structural links — no underline */
+.doc a.plain {
+  border-bottom: none;
+}
+.doc a.plain:hover {
+  color: var(--ub-accent);
+}
+
+/* inline emphasis — accent */
+.em {
+  color: var(--ub-accent);
+  font-weight: 500;
 }
 
 .rule {
