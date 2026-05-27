@@ -27,13 +27,13 @@ export default function IndexPage() {
       <p style={{ marginTop: 16 }}>
         This is the first two weeks for any new designer here. Not a product
         tour, but enough context, language, exposure, and belonging to start
-        contributing with confidence by the end of week 2. Seven program
-        modules, four reference and culture sections, two principles.
+        contributing with confidence by the end of week 2. Six ways of working,
+        five reference and culture sections, two principles.
       </p>
 
       <Rule />
 
-      {/* the fold: 7 modules, each its own page */}
+      {/* ways of working */}
       <section id="modules">
         <div
           style={{
@@ -43,9 +43,9 @@ export default function IndexPage() {
             marginBottom: 14,
           }}
         >
-          <h2 className="h-sec">Seven modules</h2>
+          <h2 className="h-sec">Ways of working</h2>
           <span className="muted" style={{ fontSize: 12 }}>
-            wk1 → wk2
+            the basics
           </span>
         </div>
 

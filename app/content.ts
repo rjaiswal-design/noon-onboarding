@@ -21,9 +21,26 @@ export type Module = {
   links?: Link[];
 };
 
+// Ways of working
 export const modules: Module[] = [
   {
     num: "01",
+    slug: "toolkit",
+    title: "Toolkit",
+    when: "setup",
+    format: "Setup + access",
+    owners: ["Design ops"],
+    summary:
+      "Everything you need installed and licensed on day one: the tool suite, the motion plugins we rely on, and where to get credentials.",
+    sections: [
+      {
+        heading: "Licenses & credentials",
+        body: "Where to request paid seats (Figma, plugins, stock, illustration, fonts), who approves them, and where shared credentials live. Ask in the design ops channel. Don’t buy personal seats and expense them, and don’t share logins outside the vault.",
+      },
+    ],
+  },
+  {
+    num: "02",
     slug: "real-life-case-studies",
     title: "Real-life case studies",
     when: "WK1 · D1–2",
@@ -47,7 +64,7 @@ export const modules: Module[] = [
     ],
   },
   {
-    num: "02",
+    num: "03",
     slug: "file-directory-access",
     title: "File directory access",
     when: "WK1 · D1",
@@ -67,7 +84,7 @@ export const modules: Module[] = [
     ],
   },
   {
-    num: "03",
+    num: "04",
     slug: "design-system-archetype",
     title: "Design system & archetype",
     when: "WK1 · D3–4",
@@ -82,30 +99,6 @@ export const modules: Module[] = [
         href: "https://www.figma.com/design/wFRKiKskxZ4vjIHbDVvngJ/Field-Design-System?node-id=105-6659&t=gatOrYtUx4gx8NQU-1",
       },
       { label: "Field DS playground", href: "https://field-ds-playground.vercel.app/" },
-    ],
-  },
-  {
-    num: "04",
-    slug: "ui-visual-motion",
-    title: "UI, visual & motion sessions",
-    when: "WK2 · D6–8",
-    format: "3 sessions + 3 deliverables",
-    owners: ["Ayaneshu", "Tamanna", "Saswata"],
-    summary:
-      "Three deep dives into how noon thinks about UI, visual, and motion, each ending with a deliverable.",
-    sections: [
-      {
-        heading: "Intent",
-        body: "Not generic craft sessions. You could learn UI principles from any course. What you need is how noon thinks about UI, how noon thinks about visual, how noon thinks about motion. Each session ends with one tangible deliverable, because theory without application doesn’t stick.",
-      },
-      {
-        heading: "The three sessions",
-        body: "UI (Ayaneshu): composition, hierarchy, density, decision-making at the screen level; deliverable: a small flow using noon’s UI framework. Visual (Tamanna): colour, type, imagery, illustration, layout; deliverable: a composition exercise. Motion (Saswata): when motion clarifies, when it delights, when it gets in the way; deliverable: a small motion study.",
-      },
-      {
-        heading: "On grading",
-        body: "The deliverables aren’t graded. They’re conversation starters. You review each one with the session owner, and that conversation is the actual learning.",
-      },
     ],
   },
   {
@@ -134,65 +127,6 @@ export const modules: Module[] = [
   },
   {
     num: "06",
-    slug: "events-buzz",
-    title: "Offline events & buzz",
-    when: "WK2 · ongoing",
-    format: "Exposure (passive)",
-    owners: ["Parallel program"],
-    summary:
-      "Hosted events and PR for design leads. You walk in to a team that’s already known.",
-    sections: [
-      {
-        heading: "Intent",
-        body: "A broader program with two pillars: hosted events bringing industry leaders into the noon design space alongside noon designers showing their own work; and PR for design leads through talks, articles, podcasts, and social presence. Both point the same way: the noon design team is known, and you feel it the moment you arrive.",
-      },
-      {
-        heading: "Your role here",
-        body: "Passive. If an event happens in your first two weeks, you attend. You observe how the leads you’ll work with show up in industry conversations. No prescribed homework, no ‘follow people on LinkedIn’ checklist. Buzz that has to be manufactured by the new joiner isn’t real buzz.",
-      },
-    ],
-  },
-  {
-    num: "07",
-    slug: "affinity",
-    title: "Affinity for product & craft",
-    when: "WK2 + ongoing",
-    format: "Lived experience + a rhythm",
-    owners: ["Team lead"],
-    summary:
-      "Place a real order, complete one full POD loop, then talk it through with your team lead. The conversation is the point.",
-    sections: [
-      {
-        heading: "Lived product experience",
-        body: "Place an order on noon and complete one full loop for your POD. For Storefront that’s browse → discover → purchase; for Customer it includes hitting a real friction point and going through resolution. Then talk it through with your team lead. The lead asks, you observe, they push back, you refine. That dialogue is where affinity forms. For senior joiners this may extend to a Dubai trip.",
-      },
-      {
-        heading: "Craft as a continuous practice",
-        body: "This doesn’t end with onboarding. A shared resource program, on a regular cadence, with everyone contributing and consuming: books on product and design, podcasts (including outside the discipline), long-form on how product companies made specific decisions, and internal references. It answers a quiet question: what does it look like to grow at noon? You don’t stop learning.",
-      },
-    ],
-  },
-];
-
-export const resources: Module[] = [
-  {
-    num: "08",
-    slug: "toolkit",
-    title: "Toolkit",
-    when: "reference",
-    format: "Setup + access",
-    owners: ["Design ops"],
-    summary:
-      "Everything you need installed and licensed on day one: the tool suite, the plugins we rely on, and where to get credentials.",
-    sections: [
-      {
-        heading: "Licenses & credentials",
-        body: "Where to request paid seats (Figma, plugins, stock, illustration, fonts), who approves them, and where shared credentials live. Ask in the design ops channel. Don’t buy personal seats and expense them, and don’t share logins outside the vault.",
-      },
-    ],
-  },
-  {
-    num: "09",
     slug: "tech-understanding",
     title: "Tech understanding",
     when: "reference",
@@ -215,8 +149,36 @@ export const resources: Module[] = [
       },
     ],
   },
+];
+
+// Reference & culture
+export const resources: Module[] = [
   {
-    num: "10",
+    num: "07",
+    slug: "beyond-pixels",
+    title: "Beyond pixels",
+    when: "the team",
+    format: "Shared doc",
+    owners: ["Everyone"],
+    summary:
+      "We’re more than our Figma files. Bring what you’re into: movies, sports, the places you love.",
+    sections: [
+      {
+        heading: "Why this exists",
+        body: "The best teams know each other as people, not just collaborators. Affinity isn’t only for the product; it’s for each other. This is the part of onboarding that has nothing to do with work, which is exactly why it matters.",
+      },
+      {
+        heading: "Bring yours",
+        body: "Films you rewatch, the sport or team you follow, your favourite travel destination, the hobby nobody asked about. Add yours to the team doc. It’s how we find the overlaps, and there are always more than you’d expect.",
+      },
+      {
+        heading: "What it unlocks",
+        body: "Better conversations, easier trust, and small talk that turns into real talk. Also, surprisingly good travel and watchlist recommendations from people who actually know your taste.",
+      },
+    ],
+  },
+  {
+    num: "08",
     slug: "taste",
     title: "taste.md",
     when: "living",
@@ -240,26 +202,66 @@ export const resources: Module[] = [
     ],
   },
   {
-    num: "11",
-    slug: "beyond-pixels",
-    title: "Beyond pixels",
-    when: "the team",
-    format: "Shared doc",
-    owners: ["Everyone"],
+    num: "09",
+    slug: "affinity",
+    title: "Affinity for product & craft",
+    when: "WK2 + ongoing",
+    format: "Lived experience + a rhythm",
+    owners: ["Team lead"],
     summary:
-      "We’re more than our Figma files. Bring what you’re into: movies, sports, the places you love.",
+      "Place a real order, complete one full POD loop, then talk it through with your team lead. The conversation is the point.",
     sections: [
       {
-        heading: "Why this exists",
-        body: "The best teams know each other as people, not just collaborators. Affinity isn’t only for the product; it’s for each other. This is the part of onboarding that has nothing to do with work, which is exactly why it matters.",
+        heading: "Lived product experience",
+        body: "Place an order on noon and complete one full loop for your POD. For Storefront that’s browse → discover → purchase; for Customer it includes hitting a real friction point and going through resolution. Then talk it through with your team lead. The lead asks, you observe, they push back, you refine. That dialogue is where affinity forms. For senior joiners this may extend to a Dubai trip.",
       },
       {
-        heading: "Bring yours",
-        body: "Films you rewatch, the sport or team you follow, your favourite travel destination, the hobby nobody asked about. Add yours to the team doc. It’s how we find the overlaps, and there are always more than you’d expect.",
+        heading: "Craft as a continuous practice",
+        body: "This doesn’t end with onboarding. A shared resource program, on a regular cadence, with everyone contributing and consuming: books on product and design, podcasts (including outside the discipline), long-form on how product companies made specific decisions, and internal references. It answers a quiet question: what does it look like to grow at noon? You don’t stop learning.",
+      },
+    ],
+  },
+  {
+    num: "10",
+    slug: "events-buzz",
+    title: "Offline events & buzz",
+    when: "WK2 · ongoing",
+    format: "Exposure (passive)",
+    owners: ["Parallel program"],
+    summary:
+      "Hosted events and PR for design leads. You walk in to a team that’s already known.",
+    sections: [
+      {
+        heading: "Intent",
+        body: "A broader program with two pillars: hosted events bringing industry leaders into the noon design space alongside noon designers showing their own work; and PR for design leads through talks, articles, podcasts, and social presence. Both point the same way: the noon design team is known, and you feel it the moment you arrive.",
       },
       {
-        heading: "What it unlocks",
-        body: "Better conversations, easier trust, and small talk that turns into real talk. Also, surprisingly good travel and watchlist recommendations from people who actually know your taste.",
+        heading: "Your role here",
+        body: "Passive. If an event happens in your first two weeks, you attend. You observe how the leads you’ll work with show up in industry conversations. No prescribed homework, no ‘follow people on LinkedIn’ checklist. Buzz that has to be manufactured by the new joiner isn’t real buzz.",
+      },
+    ],
+  },
+  {
+    num: "11",
+    slug: "ui-visual-motion",
+    title: "UI, visual & motion sessions",
+    when: "WK2 · D6–8",
+    format: "3 sessions + 3 deliverables",
+    owners: ["Ayaneshu", "Tamanna", "Saswata"],
+    summary:
+      "Three deep dives into how noon thinks about UI, visual, and motion, each ending with a deliverable.",
+    sections: [
+      {
+        heading: "Intent",
+        body: "Not generic craft sessions. You could learn UI principles from any course. What you need is how noon thinks about UI, how noon thinks about visual, how noon thinks about motion. Each session ends with one tangible deliverable, because theory without application doesn’t stick.",
+      },
+      {
+        heading: "The three sessions",
+        body: "UI (Ayaneshu): composition, hierarchy, density, decision-making at the screen level; deliverable: a small flow using noon’s UI framework. Visual (Tamanna): colour, type, imagery, illustration, layout; deliverable: a composition exercise. Motion (Saswata): when motion clarifies, when it delights, when it gets in the way; deliverable: a small motion study.",
+      },
+      {
+        heading: "On grading",
+        body: "The deliverables aren’t graded. They’re conversation starters. You review each one with the session owner, and that conversation is the actual learning.",
       },
     ],
   },
@@ -317,16 +319,16 @@ export const dependencies = [
   {
     num: "01",
     title: "Archetype self-study doc",
-    body: "The Day 3 reading. Module 03 depends on this existing; the live session on Day 4 builds directly on top of it.",
+    body: "The day-3 reading behind the archetype framework. Design system & archetype leans on this existing.",
   },
   {
     num: "02",
     title: "Events and PR program",
-    body: "Hosted events, talks, articles, podcasts. Module 06 references this; it’s a broader, separate initiative building the team’s public presence.",
+    body: "Hosted events, talks, articles, podcasts. Offline events & buzz references this; it’s a broader, separate initiative building the team’s public presence.",
   },
   {
     num: "03",
     title: "Shared resource program",
-    body: "Books, podcasts, references on a regular cadence the whole team contributes to and consumes. Module 07’s craft-as-practice layer depends on this rhythm existing.",
+    body: "Books, podcasts, references on a regular cadence the whole team contributes to and consumes. The craft-as-practice layer in Affinity for product & craft depends on this rhythm existing.",
   },
 ];
