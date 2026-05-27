@@ -65,15 +65,21 @@ body {
   border-color: var(--ub-accent);
 }
 
-/* structural links: mono, no underline */
+/* structural links: SF, no underline (prev / next nav, etc.) */
 .doc a.plain {
-  font-family: var(--ub-font-mono);
-  font-size: 13px;
-  letter-spacing: 0.02em;
   border-bottom: none;
 }
 .doc a.plain:hover {
   color: var(--ub-accent);
+}
+
+/* the [ INDEX ] nav: mono, all caps */
+.doc a.nav-index {
+  font-family: var(--ub-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 /* inline emphasis: accent */
@@ -91,30 +97,27 @@ body {
 }
 
 .eyebrow {
-  font-family: var(--ub-font-mono);
   color: var(--ub-fg-mutedXX);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   font-size: 11px;
   font-weight: 600;
 }
 
 .h-title {
-  font-family: var(--ub-font-mono);
   color: var(--ub-fg-strong);
-  font-size: 27px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   margin: 0;
 }
 
 .h-sec {
-  font-family: var(--ub-font-mono);
   color: var(--ub-fg-strong);
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
   margin: 0;
 }
 
@@ -141,20 +144,18 @@ body {
 }
 .mod-row:hover .mod-name { color: var(--ub-accent); }
 .mod-num {
-  font-family: var(--ub-font-mono);
   color: var(--ub-fg-secondary);
-  font-size: 13px;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
 }
 .mod-name {
-  font-family: var(--ub-font-mono);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ub-fg-strong);
   font-weight: 500;
   transition: color 0.12s ease;
 }
 .mod-when {
-  font-family: var(--ub-font-mono);
   color: var(--ub-fg-mutedXX);
-  font-size: 12px;
+  font-size: 12.5px;
   white-space: nowrap;
 }

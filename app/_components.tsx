@@ -18,7 +18,7 @@ export function TopBar({ back }: { back?: boolean }) {
         marginBottom: 56,
       }}
     >
-      <Link href="/" className="plain">
+      <Link href="/" className="plain nav-index">
         {back ? "[ ← Index ]" : "[ Index ]"}
       </Link>
       <span className="muted" style={{ fontSize: 12 }}>
