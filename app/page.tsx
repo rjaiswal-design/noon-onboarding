@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { modules } from "./content";
+import { modules, resources } from "./content";
 import { Rule, TopBar, SiteFooter } from "./_components";
 
 export default function IndexPage() {
@@ -28,8 +28,8 @@ export default function IndexPage() {
       <p style={{ marginTop: 16 }}>
         This is the first two weeks for any new designer here. Not a product
         tour, but enough context, language, exposure, and belonging to start
-        contributing with confidence by the end of week 2. Seven modules, four
-        themes, two principles.
+        contributing with confidence by the end of week 2. Seven program
+        modules, four reference and culture sections, two principles.
       </p>
 
       <Rule />
@@ -52,6 +52,35 @@ export default function IndexPage() {
 
         <div>
           {modules.map((m) => (
+            <Link key={m.num} href={`/m/${m.slug}`} className="mod-row">
+              <span className="mod-num">{m.num}</span>
+              <span className="mod-name">{m.title}</span>
+              <span className="mod-when">{m.when}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <Rule />
+
+      {/* reference & culture group */}
+      <section id="reference">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            marginBottom: 14,
+          }}
+        >
+          <h2 className="h-sec">Reference & culture</h2>
+          <span className="muted" style={{ fontSize: 12 }}>
+            living
+          </span>
+        </div>
+
+        <div>
+          {resources.map((m) => (
             <Link key={m.num} href={`/m/${m.slug}`} className="mod-row">
               <span className="mod-num">{m.num}</span>
               <span className="mod-name">{m.title}</span>

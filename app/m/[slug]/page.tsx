@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { modules, getModule } from "../../content";
+import { allModules, getModule } from "../../content";
 import { Rule, TopBar, Meta, SiteFooter } from "../../_components";
 
 export function generateStaticParams() {
-  return modules.map((m) => ({ slug: m.slug }));
+  return allModules.map((m) => ({ slug: m.slug }));
 }
 
 export async function generateMetadata({
@@ -31,9 +31,9 @@ export default async function ModulePage({
   const m = getModule(slug);
   if (!m) notFound();
 
-  const idx = modules.findIndex((x) => x.slug === m.slug);
-  const prev = idx > 0 ? modules[idx - 1] : null;
-  const next = idx < modules.length - 1 ? modules[idx + 1] : null;
+  const idx = allModules.findIndex((x) => x.slug === m.slug);
+  const prev = idx > 0 ? allModules[idx - 1] : null;
+  const next = idx < allModules.length - 1 ? allModules[idx + 1] : null;
 
   return (
     <div className="doc">

@@ -177,8 +177,109 @@ export const modules: Module[] = [
   },
 ];
 
+export const resources: Module[] = [
+  {
+    num: "08",
+    slug: "toolkit",
+    title: "Toolkit",
+    when: "reference",
+    format: "Setup + access",
+    owners: ["Design ops"],
+    summary:
+      "Everything you need installed and licensed on day one: the tool suite, the plugins we rely on, and where to get credentials.",
+    sections: [
+      {
+        heading: "The suite",
+        body: "Figma is home base, with FigJam for workshops and Plot, our internal UI platform, for anything that ships. Add the screen-recording and handoff tools the team uses. You’re added to the Figma org on Day 1 (see Module 02), so this is mostly about getting the rest onto your machine.",
+      },
+      {
+        heading: "Plugins we rely on",
+        body: "A short, opinionated set, not the whole marketplace: token sync, contrast and accessibility checkers, content and placeholder data, icon export, and redlining. Install these; skip the rest unless a project genuinely needs it. The list is maintained, so check it before adding your own.",
+      },
+      {
+        heading: "Licenses & credentials",
+        body: "Where to request paid seats (Figma, plugins, stock, illustration, fonts), who approves them, and where shared credentials live. Ask in the design ops channel. Don’t buy personal seats and expense them, and don’t share logins outside the vault.",
+      },
+    ],
+  },
+  {
+    num: "09",
+    slug: "tech-understanding",
+    title: "Tech understanding",
+    when: "reference",
+    format: "Primer",
+    owners: ["Eng partners"],
+    summary:
+      "noon’s app is React Native. A designer who knows what the platform can and can’t do designs faster and ships cleaner.",
+    sections: [
+      {
+        heading: "The stack",
+        body: "The app is React Native, with a shared component library, native modules where it matters, and a design system (Plot / Field DS) that maps directly to code. Knowing this means your designs map to real components, not just rectangles, and handoff stops being a translation step.",
+      },
+      {
+        heading: "What we support",
+        body: "Target platforms and minimum versions, the libraries we standardise on (navigation, lists, gestures, and Reanimated for motion), and the easing and duration tokens that already exist in code. Design within these and handoff is trivial; design outside them and you’re asking eng to build new primitives.",
+      },
+      {
+        heading: "Designing for RN",
+        body: "Constraints worth internalising: safe areas, iOS vs Android differences, performance on long lists, and which animations are cheap versus expensive. Talk to your POD’s engineers early. A five-minute question before you design saves a redesign after.",
+      },
+    ],
+  },
+  {
+    num: "10",
+    slug: "taste",
+    title: "taste.md",
+    when: "living",
+    format: "Living doc",
+    owners: ["The team"],
+    summary:
+      "What good looks like to us right now, and who we look up to. A living snapshot of the team’s taste.",
+    sections: [
+      {
+        heading: "What we look up to",
+        body: "The products, studios, and people whose craft sets our bar. Not to copy, but to calibrate against. We keep this current; as the team’s taste moves, the list moves with it.",
+      },
+      {
+        heading: "What we value",
+        body: "Clarity over decoration. Flat surfaces and honest hierarchy. Motion that means something. Restraint. The kind of detail you only notice when it’s missing. If a screen feels loud, it probably is.",
+      },
+      {
+        heading: "How to use it",
+        body: "Read it to calibrate your eye to where the team is now. Then add to it: when something raises the bar for you, drop it in with a line on why. taste.md is only useful if it stays alive.",
+      },
+    ],
+  },
+  {
+    num: "11",
+    slug: "beyond-pixels",
+    title: "Beyond pixels",
+    when: "the team",
+    format: "Shared doc",
+    owners: ["Everyone"],
+    summary:
+      "We’re more than our Figma files. Bring what you’re into: movies, sports, the places you love.",
+    sections: [
+      {
+        heading: "Why this exists",
+        body: "The best teams know each other as people, not just collaborators. Affinity isn’t only for the product; it’s for each other. This is the part of onboarding that has nothing to do with work, which is exactly why it matters.",
+      },
+      {
+        heading: "Bring yours",
+        body: "Films you rewatch, the sport or team you follow, your favourite travel destination, the hobby nobody asked about. Add yours to the team doc. It’s how we find the overlaps, and there are always more than you’d expect.",
+      },
+      {
+        heading: "What it unlocks",
+        body: "Better conversations, easier trust, and small talk that turns into real talk. Also, surprisingly good travel and watchlist recommendations from people who actually know your taste.",
+      },
+    ],
+  },
+];
+
+export const allModules = [...modules, ...resources];
+
 export function getModule(slug: string) {
-  return modules.find((m) => m.slug === slug);
+  return allModules.find((m) => m.slug === slug);
 }
 
 export const principles = [
