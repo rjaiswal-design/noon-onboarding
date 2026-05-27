@@ -186,14 +186,6 @@ export const resources: Module[] = [
       "Everything you need installed and licensed on day one: the tool suite, the plugins we rely on, and where to get credentials.",
     sections: [
       {
-        heading: "The suite",
-        body: "Figma is home base, with FigJam for workshops and Plot, our internal UI platform, for anything that ships. Add the screen-recording and handoff tools the team uses. You’re added to the Figma org on Day 1 (see Module 02), so this is mostly about getting the rest onto your machine.",
-      },
-      {
-        heading: "Plugins we rely on",
-        body: "A short, opinionated set, not the whole marketplace: token sync, contrast and accessibility checkers, content and placeholder data, icon export, and redlining. Install these; skip the rest unless a project genuinely needs it. The list is maintained, so check it before adding your own.",
-      },
-      {
         heading: "Licenses & credentials",
         body: "Where to request paid seats (Figma, plugins, stock, illustration, fonts), who approves them, and where shared credentials live. Ask in the design ops channel. Don’t buy personal seats and expense them, and don’t share logins outside the vault.",
       },
