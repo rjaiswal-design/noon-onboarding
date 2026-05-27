@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { allModules, getModule } from "../../content";
 import { Rule, TopBar, Meta, SiteFooter } from "../../_components";
 import { CredentialsDisclosure } from "../../_credentials";
+import { MotionToolsDisclosure } from "../../_motion";
 
 export function generateStaticParams() {
   return allModules.map((m) => ({ slug: m.slug }));
@@ -70,16 +71,10 @@ export default async function ModulePage({
           if (m.slug === "toolkit" && s.heading === "Licenses & credentials") {
             return (
               <Fragment key={s.heading}>
-                <div>
-                  <Link href="/motion-tools" className="disclosure plain">
-                    <span className="h-sec">Motion tool stack</span>
-                    <span className="disclosure-ind">[ → ]</span>
-                  </Link>
-                  <p style={{ margin: "8px 0 0" }}>
-                    Our After Effects to Lottie pipeline: the plugins we use, in
-                    order, and what each one is for.
-                  </p>
-                </div>
+                <MotionToolsDisclosure
+                  heading="Motion tool stack"
+                  body="Our After Effects to Lottie pipeline. The plugins we use and what each one is for."
+                />
                 <CredentialsDisclosure heading={s.heading} body={s.body} />
               </Fragment>
             );
