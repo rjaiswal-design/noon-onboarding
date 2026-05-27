@@ -8,8 +8,7 @@ export default function IndexPage() {
       <TopBar />
 
       {/* header */}
-      <span className="eyebrow">A note from Rahul · Designer onboarding</span>
-      <h1 className="h-title" style={{ marginTop: 12 }}>
+      <h1 className="h-title">
         Hey, this is Rahul.
       </h1>
       <p className="muted" style={{ margin: "6px 0 0", fontSize: 13 }}>
