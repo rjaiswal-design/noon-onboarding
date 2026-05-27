@@ -279,7 +279,13 @@ body {
 .cred td.copycell {
   white-space: normal;
 }
-.cred td.copycell .cred-val {
+.copycell-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.copycell-inner .cred-val {
   white-space: nowrap;
 }
 .cred td.copycell.wrap .cred-val {
@@ -287,33 +293,25 @@ body {
   overflow-wrap: anywhere;
 }
 .copy-btn {
-  font-family: var(--ub-font-mono);
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   color: var(--ub-fg-secondary);
   background: none;
-  border: 1px solid var(--ub-border);
-  border-radius: 4px;
-  padding: 1px 5px;
-  margin-left: 8px;
+  border: none;
+  padding: 2px;
+  margin: 0;
   cursor: pointer;
-  vertical-align: middle;
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+  transition: color 0.12s ease;
 }
-.cred tbody tr:hover .copy-btn {
-  opacity: 1;
-}
-.copy-btn:hover {
+.copy-btn:hover,
+.copy-btn.copied {
   color: var(--ub-accent);
-  border-color: var(--ub-accent-border);
 }
 .copy-btn:focus-visible {
-  opacity: 1;
   outline: none;
-  border-color: var(--ub-accent);
+  color: var(--ub-accent);
 }
 /* keep emails on one line; only the long license key wraps */
 .cred td.code { white-space: nowrap; }

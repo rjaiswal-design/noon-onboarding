@@ -8,6 +8,23 @@ function Cell({ value, code, wrap }: { value: string; code?: boolean; wrap?: boo
   return <td className={cls}>{value}</td>;
 }
 
+function CopyIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <rect x="9" y="9" width="13" height="13" rx="2" />
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
 function CopyButton({ value }: { value: string }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
@@ -22,11 +39,12 @@ function CopyButton({ value }: { value: string }) {
   return (
     <button
       type="button"
-      className="copy-btn"
+      className={copied ? "copy-btn copied" : "copy-btn"}
       onClick={copy}
       aria-label={`Copy ${value}`}
+      title={copied ? "Copied" : "Copy"}
     >
-      {copied ? "✓ copied" : "copy"}
+      {copied ? <CheckIcon /> : <CopyIcon />}
     </button>
   );
 }
@@ -35,8 +53,10 @@ function CopyCell({ value, wrap }: { value: string; wrap?: boolean }) {
   if (!value) return <td />;
   return (
     <td className={wrap ? "code wrap copycell" : "code copycell"}>
-      <span className="cred-val">{value}</span>
-      <CopyButton value={value} />
+      <div className="copycell-inner">
+        <span className="cred-val">{value}</span>
+        <CopyButton value={value} />
+      </div>
     </td>
   );
 }
