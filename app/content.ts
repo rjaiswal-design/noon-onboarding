@@ -282,6 +282,37 @@ export function getModule(slug: string) {
   return allModules.find((m) => m.slug === slug);
 }
 
+export type Credential = {
+  platform: string;
+  account: string;
+  password: string;
+  ownership: string;
+  poc: string;
+};
+
+export const credentials: Credential[] = [
+  { platform: "Adobe", account: "product@noon.com", password: "NoonDesign@123", ownership: "Rahul / Saswata", poc: "Rahul / Ayush" },
+  { platform: "Adobe 2", account: "aykapoor@noon.com", password: "NoonDesign@123", ownership: "Sanket / Tamanna", poc: "Rahul / Ayush" },
+  { platform: "Freepik", account: "product@noon.com", password: "NoonDesign@123", ownership: "Everyone", poc: "Rahul / Ayush" },
+  { platform: "Mobbin", account: "mhusni@noon.com", password: "NoMoreDribbble123", ownership: "Everyone", poc: "Rahul / Ayush" },
+  { platform: "ProtoPie", account: "aykapoor@noon.com", password: "NoonDesign@123", ownership: "", poc: "Rahul / Ayush" },
+  { platform: "Envato Elements", account: "", password: "", ownership: "", poc: "Rahul / Ayush" },
+  { platform: "Iconscout", account: "", password: "", ownership: "", poc: "" },
+  { platform: "60fps.com", account: "", password: "1FFA9753-EE0E4D23-B824DE7B-D5646CC7", ownership: "", poc: "Rahul / Ayush" },
+];
+
+export const devmode = {
+  note: "Do not give dev mode access to individual accounts. Instead ask them to sign in using one of these credentials.",
+  password: "&&@WmfiZpvuEw7G",
+  poc: "Husni",
+  accounts: [
+    "uaedevmode@noon.com",
+    "sldevmode@noon.com",
+    "egdevmode@noon.com",
+    "figmadevmode@noon.com",
+  ],
+};
+
 export const principles = [
   {
     title: "Affinity for product and craft is built, not assigned.",

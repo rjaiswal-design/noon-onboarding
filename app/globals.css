@@ -159,3 +159,49 @@ body {
   font-size: 12.5px;
   white-space: nowrap;
 }
+
+/* credentials table */
+.cred {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 6px;
+}
+.cred th {
+  text-align: left;
+  font-family: var(--ub-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ub-fg-mutedXX);
+  padding: 8px 12px 8px 0;
+  border-bottom: 1px solid var(--ub-border-strong);
+}
+.cred td {
+  padding: 9px 12px 9px 0;
+  border-bottom: 1px solid var(--ub-border);
+  vertical-align: top;
+  color: var(--ub-fg-muted);
+}
+.cred td.k {
+  color: var(--ub-fg-strong);
+  font-weight: 500;
+}
+.cred .code {
+  font-family: var(--ub-font-mono);
+  font-size: 12px;
+  color: var(--ub-fg);
+  word-break: break-all;
+}
+.cred .dash {
+  color: var(--ub-fg-secondary);
+}
+.cred-note {
+  border-left: 2px solid var(--ub-accent);
+  background: var(--ub-accent-08);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--ub-fg);
+  margin: 6px 0 14px;
+}

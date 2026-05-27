@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { allModules, getModule } from "../../content";
-import { Rule, TopBar, Meta, SiteFooter } from "../../_components";
+import { Rule, TopBar, Meta, SiteFooter, CredentialsTable } from "../../_components";
 
 export function generateStaticParams() {
   return allModules.map((m) => ({ slug: m.slug }));
@@ -70,6 +70,21 @@ export default async function ModulePage({
           </div>
         ))}
       </section>
+
+      {m.slug === "toolkit" && (
+        <>
+          <Rule />
+          <section>
+            <h2 className="h-sec" style={{ marginBottom: 6 }}>
+              Credentials
+            </h2>
+            <p className="muted" style={{ marginTop: 0, fontSize: 13 }}>
+              Internal to the noon design team. Don’t share outside noon.
+            </p>
+            <CredentialsTable />
+          </section>
+        </>
+      )}
 
       <Rule />
 
