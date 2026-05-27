@@ -276,6 +276,45 @@ body {
   color: var(--ub-fg);
   overflow-wrap: anywhere;
 }
+.cred td.copycell {
+  white-space: normal;
+}
+.cred td.copycell .cred-val {
+  white-space: nowrap;
+}
+.cred td.copycell.wrap .cred-val {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.copy-btn {
+  font-family: var(--ub-font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ub-fg-secondary);
+  background: none;
+  border: 1px solid var(--ub-border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-left: 8px;
+  cursor: pointer;
+  vertical-align: middle;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+.cred tbody tr:hover .copy-btn {
+  opacity: 1;
+}
+.copy-btn:hover {
+  color: var(--ub-accent);
+  border-color: var(--ub-accent-border);
+}
+.copy-btn:focus-visible {
+  opacity: 1;
+  outline: none;
+  border-color: var(--ub-accent);
+}
 /* keep emails on one line; only the long license key wraps */
 .cred td.code { white-space: nowrap; }
 .cred td.code.wrap { white-space: normal; overflow-wrap: anywhere; }

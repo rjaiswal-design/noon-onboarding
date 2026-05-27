@@ -8,6 +8,39 @@ function Cell({ value, code, wrap }: { value: string; code?: boolean; wrap?: boo
   return <td className={cls}>{value}</td>;
 }
 
+function CopyButton({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1200);
+    } catch {
+      /* clipboard unavailable */
+    }
+  };
+  return (
+    <button
+      type="button"
+      className="copy-btn"
+      onClick={copy}
+      aria-label={`Copy ${value}`}
+    >
+      {copied ? "✓ copied" : "copy"}
+    </button>
+  );
+}
+
+function CopyCell({ value, wrap }: { value: string; wrap?: boolean }) {
+  if (!value) return <td />;
+  return (
+    <td className={wrap ? "code wrap copycell" : "code copycell"}>
+      <span className="cred-val">{value}</span>
+      <CopyButton value={value} />
+    </td>
+  );
+}
+
 export function CredentialsDisclosure({
   heading,
   body,
@@ -71,8 +104,8 @@ export function CredentialsDisclosure({
                   {rows.map((c) => (
                     <tr key={c.platform}>
                       <td className="k">{c.platform}</td>
-                      <Cell value={c.account} code />
-                      <Cell value={c.password} code wrap />
+                      <CopyCell value={c.account} />
+                      <CopyCell value={c.password} wrap />
                       <Cell value={c.ownership} />
                     </tr>
                   ))}
@@ -98,8 +131,8 @@ export function CredentialsDisclosure({
                   <tbody>
                     {devRows.map((a) => (
                       <tr key={a}>
-                        <td className="code">{a}</td>
-                        <td className="code">{devmode.password}</td>
+                        <CopyCell value={a} />
+                        <CopyCell value={devmode.password} />
                       </tr>
                     ))}
                   </tbody>
