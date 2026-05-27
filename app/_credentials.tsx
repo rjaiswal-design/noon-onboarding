@@ -65,7 +65,6 @@ export function CredentialsDisclosure({
                     <th>Account</th>
                     <th>Password</th>
                     <th>Ownership</th>
-                    <th>Design POC</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -75,7 +74,6 @@ export function CredentialsDisclosure({
                       <Cell value={c.account} code />
                       <Cell value={c.password} code wrap />
                       <Cell value={c.ownership} />
-                      <Cell value={c.poc} />
                     </tr>
                   ))}
                 </tbody>
@@ -95,7 +93,6 @@ export function CredentialsDisclosure({
                     <tr>
                       <th>Account</th>
                       <th>Password</th>
-                      <th>Design POC</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -103,7 +100,6 @@ export function CredentialsDisclosure({
                       <tr key={a}>
                         <td className="code">{a}</td>
                         <td className="code">{devmode.password}</td>
-                        <td>{devmode.poc}</td>
                       </tr>
                     ))}
                   </tbody>
