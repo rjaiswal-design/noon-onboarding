@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { allModules, getModule } from "../../content";
@@ -67,7 +68,19 @@ export default async function ModulePage({
           // a clickable disclosure that reveals the searchable credentials.
           if (m.slug === "toolkit" && s.heading === "Licenses & credentials") {
             return (
-              <CredentialsDisclosure key={s.heading} heading={s.heading} body={s.body} />
+              <Fragment key={s.heading}>
+                <div>
+                  <Link href="/motion-tools" className="disclosure plain">
+                    <span className="h-sec">Motion tool stack</span>
+                    <span className="disclosure-ind">[ → ]</span>
+                  </Link>
+                  <p style={{ margin: "8px 0 0" }}>
+                    Our After Effects to Lottie pipeline: the plugins we use, in
+                    order, and what each one is for.
+                  </p>
+                </div>
+                <CredentialsDisclosure heading={s.heading} body={s.body} />
+              </Fragment>
             );
           }
           return (
