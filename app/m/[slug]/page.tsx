@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { allModules, getModule } from "../../content";
-import { Rule, TopBar, Meta, SiteFooter, CredentialsTable } from "../../_components";
+import { Rule, TopBar, Meta, SiteFooter } from "../../_components";
+import { CredentialsDisclosure } from "../../_credentials";
 
 export function generateStaticParams() {
   return allModules.map((m) => ({ slug: m.slug }));
@@ -61,30 +62,24 @@ export default async function ModulePage({
       <Rule />
 
       <section style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-        {m.sections.map((s) => (
-          <div key={s.heading}>
-            <h2 className="h-sec" style={{ marginBottom: 8 }}>
-              {s.heading}
-            </h2>
-            <p style={{ margin: 0 }}>{s.body}</p>
-          </div>
-        ))}
+        {m.sections.map((s) => {
+          // On the Toolkit page, the "Licenses & credentials" section becomes
+          // a clickable disclosure that reveals the searchable credentials.
+          if (m.slug === "toolkit" && s.heading === "Licenses & credentials") {
+            return (
+              <CredentialsDisclosure key={s.heading} heading={s.heading} body={s.body} />
+            );
+          }
+          return (
+            <div key={s.heading}>
+              <h2 className="h-sec" style={{ marginBottom: 8 }}>
+                {s.heading}
+              </h2>
+              <p style={{ margin: 0 }}>{s.body}</p>
+            </div>
+          );
+        })}
       </section>
-
-      {m.slug === "toolkit" && (
-        <>
-          <Rule />
-          <section>
-            <h2 className="h-sec" style={{ marginBottom: 6 }}>
-              Credentials
-            </h2>
-            <p className="muted" style={{ marginTop: 0, fontSize: 13 }}>
-              Internal to the noon design team. Don’t share outside noon.
-            </p>
-            <CredentialsTable />
-          </section>
-        </>
-      )}
 
       <Rule />
 

@@ -160,6 +160,51 @@ body {
   white-space: nowrap;
 }
 
+/* clickable disclosure (Licenses & credentials) */
+.disclosure {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+.disclosure-ind {
+  font-family: var(--ub-font-mono);
+  font-size: 13px;
+  color: var(--ub-fg-mutedXX);
+  transition: color 0.12s ease;
+}
+.disclosure:hover .disclosure-ind,
+.disclosure:hover .h-sec {
+  color: var(--ub-accent);
+}
+
+/* search input */
+.cred-search {
+  width: 100%;
+  font-family: var(--font-sf);
+  font-size: 14px;
+  color: var(--ub-fg-strong);
+  background: var(--ub-bg);
+  border: 1px solid var(--ub-border-strong);
+  border-radius: 8px;
+  padding: 9px 12px;
+  margin-bottom: 8px;
+  outline: none;
+  transition: border-color 0.12s ease;
+}
+.cred-search:focus {
+  border-color: var(--ub-accent);
+}
+.cred-search::placeholder {
+  color: var(--ub-fg-secondary);
+}
+
 /* credentials table — Notion style */
 .cred-wrap {
   border: 1px solid var(--ub-border);
