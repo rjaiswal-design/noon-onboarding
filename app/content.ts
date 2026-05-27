@@ -7,6 +7,8 @@ export const themes = [
 
 export type Section = { heading: string; body: string };
 
+export type Link = { label: string; href: string };
+
 export type Module = {
   num: string;
   slug: string;
@@ -16,6 +18,7 @@ export type Module = {
   owners: string[];
   summary: string;
   sections: Section[];
+  links?: Link[];
 };
 
 export const modules: Module[] = [
@@ -68,23 +71,17 @@ export const modules: Module[] = [
     slug: "design-system-archetype",
     title: "Design system & archetype",
     when: "WK1 · D3–4",
-    format: "Self-study doc + live session",
-    owners: ["Design Lead"],
+    format: "Playground + Storybook",
+    owners: ["Ayaneshu", "Rahul"],
     summary:
-      "Why we reach for what we reach for. A bottom sheet isn’t one thing. It’s five, depending on intent.",
-    sections: [
+      "Field DS is noon’s design system. It was built by Ayaneshu and Rahul, with contributors across the team. It ships with a live playground and a Storybook.",
+    sections: [],
+    links: [
       {
-        heading: "Intent",
-        body: "The difference between a designer who uses the design system and one who understands it is the archetype layer: knowing why you’d reach for a particular component, not just what it does. Pick on shape alone and the product feels inconsistent; pick on archetype and it feels intentional.",
+        label: "Field Design System (Figma)",
+        href: "https://www.figma.com/design/wFRKiKskxZ4vjIHbDVvngJ/Field-Design-System?node-id=105-6659&t=gatOrYtUx4gx8NQU-1",
       },
-      {
-        heading: "Self-study doc",
-        body: "Covers the full system at reference level, and for each major component (bottom sheet, Plot, modals, navigation patterns) the archetypes it supports, with examples and decision guidance: given this intent, reach for this variant. Read on Day 3.",
-      },
-      {
-        heading: "Live session",
-        body: "Day 4: the Design Lead takes the self-study and applies it. Walk through one or two real examples where the archetype framing changed the decision, reason through a small scenario together to pick which archetype and component, then open Q&A.",
-      },
+      { label: "Field DS playground", href: "https://field-ds-playground.vercel.app/" },
     ],
   },
   {

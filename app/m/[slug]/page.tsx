@@ -62,6 +62,7 @@ export default async function ModulePage({
 
       <Rule />
 
+      {m.sections.length > 0 && (
       <section style={{ display: "flex", flexDirection: "column", gap: 32 }}>
         {m.sections.map((s) => {
           // On the Toolkit page, the "Licenses & credentials" section becomes
@@ -93,6 +94,24 @@ export default async function ModulePage({
           );
         })}
       </section>
+      )}
+
+      {m.links && m.links.length > 0 && (
+        <section>
+          <h2 className="h-sec" style={{ marginBottom: 12 }}>
+            Links
+          </h2>
+          <ul className="list">
+            {m.links.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} target="_blank" rel="noreferrer">
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <Rule />
 
