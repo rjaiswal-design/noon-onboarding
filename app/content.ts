@@ -74,6 +74,9 @@ export type Module = {
   summary?: string;
   sections: Section[];
   links?: Link[];
+  /** When true, the page renders a "WIP" banner up top and a small
+   *  chip beside the title in the sidebar and on the index list. */
+  wip?: boolean;
 };
 
 // Ways of working
@@ -377,6 +380,7 @@ export const modules: Module[] = [
     when: "WK2 · D6–10",
     format: "Resource pack per POD",
     owners: ["POD seniors"],
+    wip: true,
     summary:
       "For your POD: existing features, PRDs, and 3 to 5 benchmark companies. A light-touch scan of the others.",
     sections: [
@@ -493,6 +497,7 @@ export const resources: Module[] = [
     when: "the team",
     format: "Shared doc",
     owners: ["Everyone"],
+    wip: true,
     summary:
       "We’re more than our Figma files. Bring what you’re into: movies, sports, the places you love.",
     sections: [
@@ -517,6 +522,7 @@ export const resources: Module[] = [
     when: "living",
     format: "Living doc",
     owners: ["The team"],
+    wip: true,
     summary:
       "What good looks like to us right now, and who we look up to. A living snapshot of the team’s taste.",
     sections: [
@@ -541,6 +547,7 @@ export const resources: Module[] = [
     when: "WK2 + ongoing",
     format: "Lived experience + a rhythm",
     owners: ["Team lead"],
+    wip: true,
     summary:
       "Place a real order, complete one full POD loop, then talk it through with your team lead. The conversation is the point.",
     sections: [
@@ -561,6 +568,7 @@ export const resources: Module[] = [
     when: "WK2 · ongoing",
     format: "Exposure (passive)",
     owners: ["Parallel program"],
+    wip: true,
     summary:
       "Hosted events and PR for design leads. You walk in to a team that’s already known.",
     sections: [
@@ -581,6 +589,7 @@ export const resources: Module[] = [
     when: "WK2 · D6–8",
     format: "3 sessions + 3 deliverables",
     owners: ["Ayaneshu", "Tamanna", "Saswata"],
+    wip: true,
     summary:
       "Three deep dives into how noon thinks about UI, visual, and motion, each ending with a deliverable.",
     sections: [
@@ -615,12 +624,13 @@ export type Credential = {
 };
 
 export const credentials: Credential[] = [
-  { platform: "Adobe", account: "product@noon.com", password: "NoonDesign@123", ownership: "Rahul / Saswata", poc: "Rahul / Ayush" },
+  { platform: "Adobe", account: "product@noon.com", password: "BLRdesign@123", ownership: "Rahul / Saswata", poc: "Rahul / Ayush" },
   { platform: "Adobe 2", account: "aykapoor@noon.com", password: "NoonDesign@123", ownership: "Sanket / Tamanna", poc: "Rahul / Ayush" },
   { platform: "Freepik", account: "product@noon.com", password: "NoonDesign@123", ownership: "Everyone", poc: "Rahul / Ayush" },
   { platform: "Mobbin", account: "mhusni@noon.com", password: "NoMoreDribbble123", ownership: "Everyone", poc: "Rahul / Ayush" },
   { platform: "ProtoPie", account: "aykapoor@noon.com", password: "NoonDesign@123", ownership: "", poc: "Rahul / Ayush" },
-  { platform: "Envato Elements", account: "", password: "", ownership: "", poc: "Rahul / Ayush" },
+  { platform: "Envato Elements", account: "sdutta@noon.com", password: "#SaaS10@01@2002#", ownership: "", poc: "Rahul / Ayush" },
+  { platform: "Lottie Files", account: "amchoudhary@noon.com", password: "Inazuma11@07", ownership: "", poc: "Rahul / Ayush" },
   { platform: "Iconscout", account: "", password: "", ownership: "", poc: "" },
   { platform: "60fps.com", account: "", password: "1FFA9753-EE0E4D23-B824DE7B-D5646CC7", ownership: "", poc: "Rahul / Ayush" },
 ];

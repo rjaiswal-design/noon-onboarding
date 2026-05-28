@@ -37,6 +37,7 @@ export default function ModuleSidebar({
               aria-current={isCurrent ? "page" : undefined}
             >
               {m.title}
+              {m.wip && <span className="wip-chip">WIP</span>}
             </Link>
           );
         })}

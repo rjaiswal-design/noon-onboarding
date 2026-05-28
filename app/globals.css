@@ -411,6 +411,56 @@ body {
   margin: 6px 0 0;
 }
 
+/* ── WIP markers ──────────────────────────────────────── */
+
+/* Top-of-page banner shown on modules with `wip: true`. Uses the
+   same accent stripe + soft accent surface as .cred-note so it
+   slots into the existing visual system. */
+.wip-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 12px 14px;
+  border-left: 2px solid var(--ub-accent);
+  background: var(--ub-accent-08);
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--ub-fg);
+  line-height: 1.5;
+}
+.wip-tag {
+  flex-shrink: 0;
+  font-family: var(--ub-font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ub-accent);
+  padding: 2px 7px;
+  border: 1px solid var(--ub-accent-border);
+  border-radius: 9999px;
+  background: var(--ub-bg);
+  text-transform: uppercase;
+}
+
+/* Small inline chip used in the sidebar rail and on the index list
+   rows so WIP pages are flagged before you click in. */
+.wip-chip {
+  display: inline-block;
+  margin-left: 8px;
+  font-family: var(--ub-font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ub-accent);
+  padding: 1px 5px;
+  border: 1px solid var(--ub-accent-border);
+  border-radius: 9999px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
 /* ── editorial helpers (module pages) ─────────────────── */
 
 /* Lead paragraph — the module summary. Larger, lighter weight,
@@ -470,5 +520,7 @@ body {
 }
 
 /* trigger HMR */
+
+/* hmr nudge */
 
 /* hmr nudge */

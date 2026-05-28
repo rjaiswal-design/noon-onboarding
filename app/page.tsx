@@ -55,7 +55,10 @@ export default function IndexPage() {
             {modules.map((m) => (
               <Link key={m.num} href={`/m/${m.slug}`} className="mod-row">
                 <span className="mod-num">{m.num}</span>
-                <span className="mod-name">{m.title}</span>
+                <span className="mod-name">
+                  {m.title}
+                  {m.wip && <span className="wip-chip">WIP</span>}
+                </span>
                 <span className="mod-when">{m.when}</span>
               </Link>
             ))}
@@ -86,7 +89,10 @@ export default function IndexPage() {
             {resources.map((m) => (
               <Link key={m.num} href={`/m/${m.slug}`} className="mod-row">
                 <span className="mod-num">{m.num}</span>
-                <span className="mod-name">{m.title}</span>
+                <span className="mod-name">
+                  {m.title}
+                  {m.wip && <span className="wip-chip">WIP</span>}
+                </span>
                 <span className="mod-when">{m.when}</span>
               </Link>
             ))}

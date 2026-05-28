@@ -94,6 +94,16 @@ export default async function ModulePage({
       </h1>
       {m.summary && <p className="lead">{m.summary}</p>}
 
+      {m.wip && (
+        <div className="wip-banner" role="note">
+          <span className="wip-tag">WIP</span>
+          <span>
+            This page is a work in progress. Sections below are draft and
+            will keep evolving as the program is finalised.
+          </span>
+        </div>
+      )}
+
       <div style={{ marginTop: 32 }} />
 
       {/* Modules with a libraries table get a page-wide live search
