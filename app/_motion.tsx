@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Collapsible from "./_components/Collapsible";
 
 type Tool = { name: string; use: string; href: string; linkLabel: string };
 
@@ -34,7 +35,7 @@ export function MotionToolsDisclosure({
       </button>
       <p style={{ margin: "8px 0 0" }}>{body}</p>
 
-      {open && (
+      <Collapsible open={open}>
         <div style={{ marginTop: 18 }}>
           <div className="cred-wrap">
             <table className="cred">
@@ -65,7 +66,7 @@ export function MotionToolsDisclosure({
             </table>
           </div>
         </div>
-      )}
+      </Collapsible>
     </div>
   );
 }

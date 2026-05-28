@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { credentials, devmode } from "./content";
+import Collapsible from "./_components/Collapsible";
 
 function Cell({ value, code, wrap }: { value: string; code?: boolean; wrap?: boolean }) {
   if (!value) return <td />;
@@ -95,7 +96,7 @@ export function CredentialsDisclosure({
       </button>
       <p style={{ margin: "8px 0 0" }}>{body}</p>
 
-      {open && (
+      <Collapsible open={open}>
         <div style={{ marginTop: 18 }}>
           <input
             className="cred-search"
@@ -167,7 +168,7 @@ export function CredentialsDisclosure({
             </p>
           )}
         </div>
-      )}
+      </Collapsible>
     </div>
   );
 }

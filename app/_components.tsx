@@ -10,20 +10,10 @@ export function Rule() {
 
 export function TopBar({ back }: { back?: boolean }) {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "baseline",
-        marginBottom: 56,
-      }}
-    >
+    <div style={{ marginBottom: 56 }}>
       <Link href="/" className="plain nav-index">
         {back ? "[ ← Index ]" : "[ Index ]"}
       </Link>
-      <span className="muted" style={{ fontSize: 12 }}>
-        Rahul Jaiswal · noon
-      </span>
     </div>
   );
 }

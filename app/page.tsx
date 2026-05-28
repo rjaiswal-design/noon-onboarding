@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { modules, resources } from "./content";
 import { Rule, TopBar, SiteFooter } from "./_components";
+import StaggerList from "./_components/StaggerList";
 
 export default function IndexPage() {
   return (
@@ -50,13 +51,15 @@ export default function IndexPage() {
         </div>
 
         <div>
-          {modules.map((m) => (
-            <Link key={m.num} href={`/m/${m.slug}`} className="mod-row">
-              <span className="mod-num">{m.num}</span>
-              <span className="mod-name">{m.title}</span>
-              <span className="mod-when">{m.when}</span>
-            </Link>
-          ))}
+          <StaggerList>
+            {modules.map((m) => (
+              <Link key={m.num} href={`/m/${m.slug}`} className="mod-row">
+                <span className="mod-num">{m.num}</span>
+                <span className="mod-name">{m.title}</span>
+                <span className="mod-when">{m.when}</span>
+              </Link>
+            ))}
+          </StaggerList>
         </div>
       </section>
 
@@ -79,13 +82,15 @@ export default function IndexPage() {
         </div>
 
         <div>
-          {resources.map((m) => (
-            <Link key={m.num} href={`/m/${m.slug}`} className="mod-row">
-              <span className="mod-num">{m.num}</span>
-              <span className="mod-name">{m.title}</span>
-              <span className="mod-when">{m.when}</span>
-            </Link>
-          ))}
+          <StaggerList>
+            {resources.map((m) => (
+              <Link key={m.num} href={`/m/${m.slug}`} className="mod-row">
+                <span className="mod-num">{m.num}</span>
+                <span className="mod-name">{m.title}</span>
+                <span className="mod-when">{m.when}</span>
+              </Link>
+            ))}
+          </StaggerList>
         </div>
       </section>
 
