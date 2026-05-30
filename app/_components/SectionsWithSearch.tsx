@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Section } from "../content";
+import NumberText from "./NumberText";
 
 /**
  * Sections renderer with a page-wide live search bar.
@@ -50,7 +51,7 @@ export default function SectionsWithSearch({
     for (const s of sections) {
       const sectionHit =
         s.heading.toLowerCase().includes(query) ||
-        s.body.toLowerCase().includes(query);
+        (s.body ?? "").toLowerCase().includes(query);
       const libs = sectionHit
         ? s.libs ?? []
         : (s.libs ?? []).filter(
@@ -149,7 +150,11 @@ export default function SectionsWithSearch({
               <h2 className="h-sec" style={{ marginBottom: 10 }}>
                 {s.heading}
               </h2>
-              <p style={{ margin: 0 }}>{s.body}</p>
+              {s.body && (
+                <p style={{ margin: 0 }}>
+                  <NumberText>{s.body}</NumberText>
+                </p>
+              )}
               {libs.length > 0 && (
                 <div className="cred-wrap" style={{ marginTop: 16 }}>
                   <table className="cred">

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Collapsible from "./_components/Collapsible";
+import DisclosureChevron from "./_components/DisclosureChevron";
 
 type Tool = { name: string; use: string; href: string; linkLabel: string };
 
@@ -31,7 +32,7 @@ export function MotionToolsDisclosure({
         onClick={() => setOpen((o) => !o)}
       >
         <span className="h-sec">{heading}</span>
-        <span className="disclosure-ind">{open ? "[ − ]" : "[ + ]"}</span>
+        <DisclosureChevron open={open} />
       </button>
       <p style={{ margin: "8px 0 0" }}>{body}</p>
 

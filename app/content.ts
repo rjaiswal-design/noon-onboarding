@@ -19,8 +19,15 @@ export type Lib = {
 
 /** A single Figma file in a project. Rendered as a row in a table
  *  with the file name as the clickable link. The optional `pod`
- *  groups files visually under the owning team. */
-export type FigmaFile = { key: string; name: string; pod?: string };
+ *  groups files visually under the owning team. `barRaiser` marks
+ *  files worth studying first; surfaces a chip beside the name and
+ *  also pulls into a dedicated "Bar raisers" section at the bottom. */
+export type FigmaFile = {
+  key: string;
+  name: string;
+  pod?: string;
+  barRaiser?: boolean;
+};
 
 /** A tool, plugin, asset pack, or external resource. Shape matches
  *  Lib but reads semantically as "tools" in the table header. */
@@ -37,21 +44,73 @@ export type Tool = {
   cta?: string;
 };
 
+/** Generic table — rendered with the same `.cred-wrap` Notion-style
+ *  shell as the credentials and library tables. First column gets
+ *  the bold `k` treatment. Numbers in any cell are auto-chipped. */
+export type TableData = {
+  headers: string[];
+  rows: string[][];
+};
+
+/** A person we look up to. Rendered as a row in the designers
+ *  table with X (Twitter) and portfolio link columns. */
+export type Person = {
+  name: string;
+  x?: string;
+  portfolio?: string;
+  /** Optional short descriptor (e.g. team, focus area). */
+  note?: string;
+};
+
+/** A product we admire. Rendered as a chip in the products cloud. */
+export type Product = {
+  name: string;
+  url?: string;
+};
+
+/** Donut chart data. `centerLabel` is the small caps label inside
+ *  the hole; the total of all slice values is rendered beneath it.
+ *  `unit` (e.g. "k", "%") is appended to slice values in the legend. */
+export type PieData = {
+  centerLabel?: string;
+  unit?: string;
+  slices: { label: string; value: number; color?: string }[];
+};
+
 export type Section = {
   heading: string;
-  body: string;
+  /** Optional sub-copy. When omitted, the section heading sits
+   *  directly above whatever structured content follows (table,
+   *  videos, etc.). */
+  body?: string;
   /** Optional embedded video (e.g. screen.studio share URL).
-   *  Rendered below the section body as a 16:9 iframe. */
+   *  Rendered below the section body as a 16:9 iframe. Kept for
+   *  single-video sections; use `videos` for multi-clip carousels. */
   video?: { url: string; caption?: string };
+  /** Optional carousel of videos. Each entry adds an author tab at
+   *  the top of the player. */
+  videos?: { url: string; caption?: string; author?: string }[];
   /** Optional libraries table. Rendered below the body as a 2-column
    *  table: library chip-link | what it does. */
   libs?: Lib[];
   /** Optional Figma files table. Rendered below the body as a list of
    *  file rows, each linking to the file on figma.com. */
   figmaFiles?: FigmaFile[];
+  /** When true, render the figmaFiles table as a flat list (no POD
+   *  grouping, no search input). Used by the "Bar raisers" section. */
+  flatFiles?: boolean;
   /** Optional tools / resources table. Same 2-column shape as libs
    *  but labelled "Tool / Use case". */
   tools?: Tool[];
+  /** Optional free-form table (Markets/Plans/Pricing etc.). */
+  table?: TableData;
+  /** Optional donut chart (Current pulse etc.). */
+  pie?: PieData;
+  /** Optional table of people we follow (designers, etc.).
+   *  Rendered with X + portfolio link columns. */
+  people?: Person[];
+  /** Optional product cloud — chip-link list of products we admire. */
+  products?: Product[];
 };
 
 export type Link = {
@@ -84,7 +143,7 @@ export const modules: Module[] = [
   {
     num: "01",
     slug: "toolkit",
-    title: "Toolkit",
+    title: "Setup",
     when: "setup",
     format: "Setup + access",
     owners: ["Design ops"],
@@ -245,7 +304,7 @@ export const modules: Module[] = [
   {
     num: "02",
     slug: "real-life-case-studies",
-    title: "Real-life case studies",
+    title: "Case studies",
     when: "WK1 · D1–2",
     format: "Produced video + live panel",
     owners: ["Ayaneshu", "Tamanna", "Sid", "Saswata"],
@@ -254,31 +313,43 @@ export const modules: Module[] = [
     sections: [
       {
         heading: "Product design",
-        body: "How the product design team works day-to-day at noon. The walkthrough below is the profile page as a worked example.",
-        video: {
-          // Self-hosted under /public/videos. Originally a screen.studio share
-          // (https://screen.studio/share/2HyoOgyi) but screen.studio sets
-          // `frame-ancestors 'self'` + `X-Frame-Options: SAMEORIGIN`, so the
-          // share page cannot be iframed. We downloaded the underlying MP4
-          // once and serve it from /public so the player works inline.
-          url: "/videos/product-design-profile-walkthrough.mp4",
-          caption: "Walkthrough · profile page",
-        },
+        videos: [
+          {
+            url: "/videos/product-design-profile-walkthrough.mp4",
+            author: "Rahul",
+            caption: "Profile page walkthrough",
+          },
+          {
+            url: "/videos/product-design-address-sid.mp4",
+            author: "Sid",
+            caption: "Address case study",
+          },
+          {
+            url: "/videos/product-design-reviews-anurag.mp4",
+            author: "Anurag",
+            caption: "Reviews case study",
+          },
+        ],
       },
       {
         heading: "Visual design",
-        body: "How visual designers approach brand expression, hero compositions, and the visual layer of the product.",
+        videos: [
+          {
+            url: "/videos/visual-design-tamanna.mp4",
+            author: "Tamanna",
+            caption: "Visual design walkthrough",
+          },
+        ],
       },
       {
         heading: "Motion",
-        body: "How motion is used at noon. Principles first, then the tokens and primitives that keep it consistent.",
       },
     ],
   },
   {
     num: "03",
     slug: "file-directory-access",
-    title: "File directory access",
+    title: "Files",
     when: "WK1 · D1",
     format: "Convention + 15-min walkthrough",
     owners: ["Ayaneshu"],
@@ -295,13 +366,13 @@ export const modules: Module[] = [
         heading: "Files in the noon 2.0 project",
         body: "Live list of every file in the noon 2.0 Figma project. Click any row to open the file in Figma.",
         figmaFiles: [
-          { name: "Address 2.0  [Revamp]", key: "gumh2DH8XdWlCBtLyrM7dd", pod: "Customer" },
+          { name: "Address 2.0  [Revamp]", key: "gumh2DH8XdWlCBtLyrM7dd", pod: "Customer", barRaiser: true },
           { name: "Ads on noon", key: "saogKp1kUUvefrEbTWYs46", pod: "Monetization" },
           { name: "Asset Collection - Repository", key: "ziw6iPjwcuSvu83B4rSEpn", pod: "Customer" },
           { name: "Brand Ads", key: "r858X0lphsPJoZ2uWZq1MV", pod: "Monetization" },
           { name: "Cart new game", key: "Og45KucvzYGNa35p3yyDE8", pod: "Cart & checkout" },
           { name: "Cart revamp", key: "S1R36kvqX3vPhcWXupbCUe", pod: "Cart & checkout" },
-          { name: "Co-brand cards landing page", key: "msJlqDipTHyD0QCJa4X8uu", pod: "Partnership" },
+          { name: "Co-brand cards landing page", key: "msJlqDipTHyD0QCJa4X8uu", pod: "Partnership", barRaiser: true },
           { name: "Collections", key: "BjOhHBHDBe8kzL22ThqPqG", pod: "Discovery" },
           { name: "Collections Dev Handoff file", key: "1rBQhJHcgKplNy0y4TJLPN", pod: "Discovery" },
           { name: "Cross border order tracking", key: "nBRyz3vSV97rHT9qRIAjBu", pod: "Cart & checkout" },
@@ -317,10 +388,10 @@ export const modules: Module[] = [
           { name: "Marketplace Switcher", key: "J575bVy8d0OiOBs5hVvGp8", pod: "Customer" },
           { name: "Marketplace Upsell Bottomsheet", key: "TKZiWOhTadymtHEcuAZ4jm", pod: "Customer" },
           { name: "Master file", key: "QlmeohTxuz9vrITspppECZ", pod: "Customer" },
-          { name: "My Account - noon Re-Design 2.0", key: "4NvyqO60K7Xn4gRJrkWmzQ", pod: "Customer" },
+          { name: "My Account - noon Re-Design 2.0", key: "4NvyqO60K7Xn4gRJrkWmzQ", pod: "Customer", barRaiser: true },
           { name: "New Category Grid", key: "o9mRzpuvgRauAT2Gl9kDVs", pod: "Discovery" },
           { name: "New widget (CMS)", key: "mZh8jgjwvjaH6t8HZoA0xY", pod: "Customer" },
-          { name: "Onboarding", key: "o65TUSOL2EScYY6w5NVNx0", pod: "Customer" },
+          { name: "Onboarding", key: "o65TUSOL2EScYY6w5NVNx0", pod: "Customer", barRaiser: true },
           { name: "Order confirmation", key: "HfoetirHifa3gCNL9tJh6V", pod: "Cart & checkout" },
           { name: "Orders 2.0 [2026]", key: "Kj3myTvCAZAFzV4quSy6f6", pod: "Cart & checkout" },
           { name: "PDP Redesign", key: "xPr9Ln37JGSBGvNtrsyD0y", pod: "Discovery" },
@@ -331,7 +402,7 @@ export const modules: Module[] = [
           { name: "R&R 2.0", key: "KzR8dy12uT8CtgBRHHY6Qx", pod: "Customer" },
           { name: "Returns", key: "dZxYYSY5A5uSnvbgTICTaV", pod: "Cart & checkout" },
           { name: "Saved Cards Payment", key: "ufpp1476iTIlCUS8bXRmdS", pod: "Cart & checkout" },
-          { name: "Saved cards", key: "gbdWWC0jMzJSQWM0mNrUMA", pod: "Cart & checkout" },
+          { name: "Saved cards", key: "gbdWWC0jMzJSQWM0mNrUMA", pod: "Cart & checkout", barRaiser: true },
           { name: "Search", key: "4Xn0zIMvvaEbA3knmlPzrT", pod: "Discovery" },
           { name: "Search Penetration", key: "RNIBxpntBgeuTszo2d36mH", pod: "Discovery" },
           { name: "Services [UC + Aster]", key: "lUl0aXaeM0D2VcU4fEmVcP", pod: "Customer" },
@@ -349,12 +420,24 @@ export const modules: Module[] = [
           { name: "✅ Buy now v2", key: "AmAM2S45pOELL4YwD1gizc", pod: "Cart & checkout" },
         ],
       },
+      {
+        heading: "Bar raisers",
+        body: "Files worth studying first. Bar-raising work from the team that resets what good looks like.",
+        flatFiles: true,
+        figmaFiles: [
+          { name: "Address 2.0  [Revamp]", key: "gumh2DH8XdWlCBtLyrM7dd", barRaiser: true },
+          { name: "Co-brand cards landing page", key: "msJlqDipTHyD0QCJa4X8uu", barRaiser: true },
+          { name: "Saved cards", key: "gbdWWC0jMzJSQWM0mNrUMA", barRaiser: true },
+          { name: "My Account - noon Re-Design 2.0", key: "4NvyqO60K7Xn4gRJrkWmzQ", barRaiser: true },
+          { name: "Onboarding", key: "o65TUSOL2EScYY6w5NVNx0", barRaiser: true },
+        ],
+      },
     ],
   },
   {
     num: "04",
     slug: "design-system-archetype",
-    title: "Design system & archetype",
+    title: "The system",
     when: "WK1 · D3–4",
     format: "Playground + Storybook",
     owners: ["Ayaneshu", "Rahul"],
@@ -376,32 +459,18 @@ export const modules: Module[] = [
   {
     num: "05",
     slug: "pod-research",
-    title: "POD user research packs",
+    title: "POD packs",
     when: "WK2 · D6–10",
     format: "Resource pack per POD",
     owners: ["POD seniors"],
-    wip: true,
     summary:
-      "For your POD: existing features, PRDs, and 3 to 5 benchmark companies. A light-touch scan of the others.",
-    sections: [
-      {
-        heading: "Intent",
-        body: "For the problem space you’re about to work in: companies worth studying, PRDs explaining decisions, and existing features. So you don’t redesign what already exists.",
-      },
-      {
-        heading: "The four PODs",
-        body: "Storefront, Monetization, Cart & Checkout, Customer. Each pack has existing features, PRDs, and 3 to 5 benchmark companies with a short note on each.",
-      },
-      {
-        heading: "Depth strategy",
-        body: "Go deep on your placed POD; light-touch scan the other three. Each pack is owned by someone inside that POD, so it stays living and accurate.",
-      },
-    ],
+      "Per-POD context: existing features, PRDs, and 3 to 5 benchmark companies. The packs themselves are linked below.",
+    sections: [],
   },
   {
     num: "06",
     slug: "tech-understanding",
-    title: "Tech understanding",
+    title: "The stack",
     when: "reference",
     format: "Primer",
     owners: ["Eng partners"],
@@ -492,6 +561,46 @@ export const modules: Module[] = [
 export const resources: Module[] = [
   {
     num: "07",
+    slug: "values",
+    title: "Values",
+    when: "day one, every day",
+    format: "Seven lines",
+    owners: ["The team"],
+    summary:
+      "How we behave on this team. Not aspirations. Defaults. Hold yourself to these. We will.",
+    sections: [
+      {
+        heading: "The customer doesn’t care what you do.",
+        body: "Product, visual, motion. These are administrative labels. The person opening the app doesn’t know them and doesn’t care. They see one thing: the screen in front of them. If your beautiful illustration confuses the flow, the illustration is wrong. If your slick interaction breaks the visual rhythm, the interaction is wrong. The end experience is the only KPI. Everything else is internal scaffolding. Defend the screen, not your discipline. If you find yourself defending your craft because it’s your craft, you’ve already lost the argument.",
+      },
+      {
+        heading: "Be an owner. Renters don’t last.",
+        body: "Own everything. Not just the file with your name on it. The studio kitchen. The design system. The bug nobody else has noticed yet. From the first sketch to the bug report that lands six months later, the work is yours. You don’t hand off problems and watch them go sideways from a safe distance. You notice what’s off and you fix it. You give credit. You absorb blame. The high here comes from caring more than your job description asks for. That’s the dopamine. That’s why owners keep showing up. Renters get treated like renters, and the team moves on without them. If you ever catch yourself thinking “that’s not my problem,” you’ve already failed. We’ll notice before you do.",
+      },
+      {
+        heading: "Obsess over the customer.",
+        body: "Talk about the customer more than the work. Their problems get the meeting time. Their feedback gets read first, every time. Every Monday someone should walk in saying “a customer told us X” and the week should re-orient around it. If you’ve gone two weeks without watching a real user open this app, you’re guessing. Designers who guess for a living get replaced by designers who don’t. Craft serves the customer. Not the other way around.",
+      },
+      {
+        heading: "Craft is baseline. Obsession is the bar.",
+        body: "Knowing how to design isn’t special here. That’s the floor. The bar is obsession over every micro-decision: the letter spacing, the exact word in the button, the illustration that almost works versus actually works, the 250 milliseconds of emotion when the screen lands. You should be vibrating about shipping this to a real customer. If you’re not obsessing over the small things, the work isn’t done, and you’re not the person to finish it. Shipping is agentic, not assigned. You don’t wait to be asked. You don’t do “your part.” You take it across the line because no one else cares as much as you do. Or you’re replaceable by someone who will.",
+      },
+      {
+        heading: "Best idea wins. Step on toes if you must.",
+        body: "Seniority doesn’t win arguments. Tenure doesn’t win arguments. The clearest case wins, even when the person making it is two months in. Toe-stepping is fine. Politeness with bad ideas is cowardice. Be respectful of people. Be ruthless with the work. If you keep your mouth shut to avoid friction, you’ve already lost something more expensive than the argument.",
+      },
+      {
+        heading: "Principled confrontation.",
+        body: "When something is wrong, say it. In the meeting, not the corridor afterwards. Bring the principle, not your mood. The discomfort of an honest conversation is always cheaper than the rework you’ll do to avoid it. If you whisper in the hallway what you should have said in the room, you’re part of the problem. Fix it on the spot, or stop calling it a problem.",
+      },
+      {
+        heading: "Nothing is permanent except change.",
+        body: "The product will change. The team will change. The market will change. If you build your value on how things were last quarter, you’re already obsolete. Hold opinions strongly. Hold attachments loosely. The designer who survives this place is the one who adapts faster than it does. The one who doesn’t, doesn’t.",
+      },
+    ],
+  },
+  {
+    num: "08",
     slug: "beyond-pixels",
     title: "Beyond pixels",
     when: "the team",
@@ -516,7 +625,7 @@ export const resources: Module[] = [
     ],
   },
   {
-    num: "08",
+    num: "09",
     slug: "taste",
     title: "taste.md",
     when: "living",
@@ -527,23 +636,73 @@ export const resources: Module[] = [
       "What good looks like to us right now, and who we look up to. A living snapshot of the team’s taste.",
     sections: [
       {
-        heading: "What we look up to",
-        body: "The products, studios, and people whose craft sets our bar. Not to copy, but to calibrate against.",
+        heading: "Designers we follow",
+        body: "Watch what they ship and how they talk about it. Their feeds are a free education.",
+        people: [
+          { name: "Benji Taylor", x: "https://x.com/benjitaylor", portfolio: "https://benjitay.com" },
+          { name: "Emil Kowalski", x: "https://x.com/emilkowalski_", portfolio: "https://emilkowal.ski" },
+          { name: "Rauno Freiberg", x: "https://x.com/raunofreiberg", portfolio: "https://rauno.me" },
+        ],
       },
       {
-        heading: "What we value",
-        body: "Clarity over decoration. Flat surfaces, honest hierarchy. Motion that means something. Restraint.",
+        heading: "Products we admire",
+        body: "Open them. Use them. Steal the right things; reject the wrong ones. The bar is set by people who care about the same details we do.",
+        products: [
+          { name: "Apple", url: "https://apple.com" },
+          { name: "Airbnb", url: "https://airbnb.com" },
+          { name: "Spotify", url: "https://spotify.com" },
+          { name: "Family Wallet", url: "https://family.co" },
+          { name: "Bump" },
+          { name: "Wise", url: "https://wise.com" },
+          { name: "Revolut", url: "https://revolut.com" },
+          { name: "Uber", url: "https://uber.com" },
+          { name: "Duolingo", url: "https://duolingo.com" },
+          { name: "Netflix", url: "https://netflix.com" },
+          { name: "Linear", url: "https://linear.app" },
+          { name: "Raycast", url: "https://raycast.com" },
+          { name: "YouTube", url: "https://youtube.com" },
+          { name: "World App", url: "https://world.org" },
+          { name: "Base", url: "https://base.org" },
+          { name: "Go Steps" },
+          { name: "Any Distance", url: "https://anydistance.club" },
+          { name: "X", url: "https://x.com" },
+          { name: "Brilliant", url: "https://brilliant.org" },
+          { name: "Lego building flow" },
+          { name: "Box Box Club" },
+          { name: "Telegram", url: "https://telegram.org" },
+          { name: "Arc", url: "https://arc.net" },
+          { name: "Cash App", url: "https://cash.app" },
+          { name: "Luminar", url: "https://skylum.com/luminar" },
+          { name: "Exoplan" },
+          { name: "Dieter Rams · Braun" },
+          { name: "Discord", url: "https://discord.com" },
+          { name: "Untitled" },
+        ],
       },
       {
-        heading: "How to use it",
-        body: "Read it to calibrate your eye to where the team is now. When something raises the bar for you, drop it in with a line on why.",
+        heading: "Where to study",
+        body: "When you need fresh references, these are the wells.",
+        tools: [
+          {
+            name: "Mobbin",
+            kind: "Reference",
+            href: "https://mobbin.com",
+            what: "Searchable library of real product UX. Every flow, screen by screen.",
+          },
+          {
+            name: "60fps.design",
+            kind: "Reference",
+            href: "https://60fps.design",
+            what: "Curated motion design references. The bar for what 60fps actually feels like.",
+          },
+        ],
       },
     ],
   },
   {
-    num: "09",
+    num: "10",
     slug: "affinity",
-    title: "Affinity for product & craft",
+    title: "Craft",
     when: "WK2 + ongoing",
     format: "Lived experience + a rhythm",
     owners: ["Team lead"],
@@ -562,9 +721,9 @@ export const resources: Module[] = [
     ],
   },
   {
-    num: "10",
+    num: "11",
     slug: "events-buzz",
-    title: "Offline events & buzz",
+    title: "Buzz",
     when: "WK2 · ongoing",
     format: "Exposure (passive)",
     owners: ["Parallel program"],
@@ -583,9 +742,9 @@ export const resources: Module[] = [
     ],
   },
   {
-    num: "11",
+    num: "12",
     slug: "ui-visual-motion",
-    title: "UI, visual & motion sessions",
+    title: "Sessions",
     when: "WK2 · D6–8",
     format: "3 sessions + 3 deliverables",
     owners: ["Ayaneshu", "Tamanna", "Saswata"],
@@ -609,7 +768,94 @@ export const resources: Module[] = [
   },
 ];
 
-export const allModules = [...modules, ...resources];
+// POD packs — dedicated context pages linked from POD user research packs.
+// Live alongside modules and resources but with their own sidebar group so
+// they don't disturb the "Six ways of working / five reference" framing on
+// the index page.
+export const packs: Module[] = [
+  {
+    num: "P1",
+    slug: "noon-one",
+    title: "noon One",
+    when: "reference",
+    format: "Product context pack",
+    owners: ["Rahul"],
+    summary:
+      "noon’s paid membership: unlimited free delivery, member-only deals, bundled entertainment across every noon vertical. ~1.2M members today.",
+    sections: [
+      {
+        heading: "The job it does",
+        body: "noon One is the connective tissue of the super app. It converts a transactional shopper into a member who pays off across e-commerce, food, and quick commerce. Every feature is judged on one of two mandates: acquisition or retention.",
+      },
+      {
+        heading: "Why a super-app subscription is different",
+        body: "Multi-vertical payoff is the moat: hard to match, sticky once two verticals activate. Frequency in food and Minutes manufactures the daily habit; the high-margin shopping verticals carry the unit economics. The savings tracker is the renewal argument.",
+      },
+      {
+        heading: "Markets, plans & pricing",
+        body: "Available in UAE and KSA. Prices below are the base / rack rate; most members enter via a trial or a promo.",
+        table: {
+          headers: ["Market", "Plan", "Price", "Notes"],
+          rows: [
+            ["UAE", "One Monthly", "AED 24.99", "Standard entry"],
+            ["UAE", "One Annual", "~60% cheaper / mo", "Best value, commitment play"],
+            ["UAE", "Bundle (OSN+ + Yango)", "Promotional", "Membership + streaming"],
+            ["UAE", "Duo (upcoming)", "~AED 39.99", "2 seats"],
+            ["UAE", "Family (upcoming)", "~AED 49.99", "5 seats"],
+            ["KSA", "Premium Monthly", "SAR 29.99", "Major metros only"],
+            ["KSA", "Standard", "—", "Rest of Kingdom"],
+            ["KSA", "VIP core", "SAR 19.99", "Lower tier"],
+            ["KSA", "OSN+ bundle", "Promotional", "Streaming"],
+          ],
+        },
+      },
+      {
+        heading: "Current pulse",
+        body: "Active members split between markets. UAE deeper and more mature; KSA earlier-stage but with higher AOV. Members out-transact regulars ~1.2× on TPC; acquisition is softening and churn now outpaces new joins.",
+        pie: {
+          centerLabel: "Active",
+          unit: "k",
+          slices: [
+            { label: "UAE", value: 564, color: "#ff5800" },
+            { label: "KSA", value: 338, color: "#1d2539" },
+          ],
+        },
+      },
+      {
+        heading: "Benefits, vertical by vertical",
+        body: "Unlimited free delivery above a per-surface MOV across noon, noon Food, noon Minutes, Supermall and NowNow. noon One Day on the 1st of every month is the recurring hook. Member-only deals, priority support, streaming up to 50% off, and the running savings tally.",
+      },
+      {
+        heading: "Partnerships",
+        body: "Streaming: OSN+ and Yango (Yango Play). Co-brand cards: Emirates NBD (UAE, 1 year free + lifetime 50% off) and SAB / SABB (KSA, 2 years free Premium). Bank-card members are a structurally different cohort — pre-committed for 1–2 years.",
+      },
+      {
+        heading: "Competitive landscape",
+        body: "Region: Amazon Prime, talabat pro, Careem Plus, Deliveroo Plus, HungerStation/Jahez/Mrsool. Global inspiration: Walmart+, Swiggy One, Zomato Gold, Meituan, Yandex Plus, Spotify Duo/Family.",
+      },
+      {
+        heading: "Behavioural signals shaping the roadmap",
+        body: "48% of noon One users share a payment method (vs 38% of regular). 35% of UAE accounts log in on 2+ devices (vs 18%). ~40% of shared-Wi-Fi clusters are 2-person — a market a 5-seat family plan over-serves.",
+      },
+      {
+        heading: "Active workstreams",
+        body: "Duo + Family sharing plans (Spotify-style, no household lock). Landing funnel revamp. Tighter noon One × Minutes and × Food initiatives — order notifications, coupon integration, the noon One toggle.",
+      },
+      {
+        heading: "Strategic lens for new features",
+        body: "Five questions. Which mandate (acquisition or retention)? Does it compound across verticals? Does it strengthen the savings narrative? What cohort (organic, bank-card, bundle, trial, shared)? Where’s the blind spot — receiver-side demand, the activation cliff, or KSA penetration?",
+      },
+    ],
+    links: [
+      {
+        label: "noon One — full context doc (May 2026)",
+        href: "/docs/noon-one-context.md",
+      },
+    ],
+  },
+];
+
+export const allModules = [...modules, ...resources, ...packs];
 
 export function getModule(slug: string) {
   return allModules.find((m) => m.slug === slug);

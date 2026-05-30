@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Tool } from "../content";
 import ToolsTable from "./ToolsTable";
 import Collapsible from "./Collapsible";
+import DisclosureChevron from "./DisclosureChevron";
 
 /**
  * Collapsible wrapper for the "Product & visual toolkit" section.
@@ -33,7 +34,7 @@ export default function ToolkitDisclosure({
         onClick={() => setOpen((o) => !o)}
       >
         <span className="h-sec">{heading}</span>
-        <span className="disclosure-ind">{open ? "[ − ]" : "[ + ]"}</span>
+        <DisclosureChevron open={open} />
       </button>
       <p style={{ margin: "8px 0 0" }}>{body}</p>
 

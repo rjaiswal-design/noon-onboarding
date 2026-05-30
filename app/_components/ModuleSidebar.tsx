@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { modules, resources } from "../content";
+import { modules, resources, packs } from "../content";
 
 /**
  * Left rail for module pages. Mirrors the in-doc nav pattern from
@@ -13,9 +13,17 @@ export default function ModuleSidebar({
 }: {
   currentSlug: string;
 }) {
-  const inWaysOfWorking = modules.some((m) => m.slug === currentSlug);
-  const siblings = inWaysOfWorking ? modules : resources;
-  const groupLabel = inWaysOfWorking ? "Ways of working" : "Reference & culture";
+  // Resolve which group the current module sits in. Packs are their
+  // own thing — separate from the index page's Ways/Reference framing.
+  let siblings = modules;
+  let groupLabel = "How we work";
+  if (resources.some((m) => m.slug === currentSlug)) {
+    siblings = resources;
+    groupLabel = "Culture";
+  } else if (packs.some((m) => m.slug === currentSlug)) {
+    siblings = packs;
+    groupLabel = "POD packs";
+  }
 
   return (
     <nav className="module-rail" aria-label="Module navigation">

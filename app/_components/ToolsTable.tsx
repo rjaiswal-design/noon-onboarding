@@ -16,6 +16,8 @@ const KIND_ORDER = [
   "Terminal",
   "Task management",
   "Conversations",
+  // taste.md groups
+  "Reference",
 ];
 
 /** Plural / proper section heading per kind. */
@@ -31,6 +33,7 @@ const GROUP_LABEL: Record<string, string> = {
   "Terminal": "Terminal",
   "Task management": "Task management",
   "Conversations": "Conversations",
+  "Reference": "Reference",
 };
 
 /** Single accent color for all sub-section dots — keeps the toolkit
@@ -51,6 +54,7 @@ const KIND_CTA: Record<string, string> = {
   "Terminal": "Download",
   "Task management": "Open",
   "Conversations": "Open",
+  "Reference": "Open",
 };
 
 function ctaFor(t: Tool): string {

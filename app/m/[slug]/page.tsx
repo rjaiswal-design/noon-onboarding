@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { allModules, getModule } from "../../content";
+import { allModules, getModule, packs } from "../../content";
 import { Rule, SiteFooter } from "../../_components";
 import { CredentialsDisclosure } from "../../_credentials";
 import { MotionToolsDisclosure } from "../../_motion";
 import SmoothCorners from "../../_components/SmoothCorners";
+import VideoCarousel from "../../_components/VideoCarousel";
 import SectionsWithSearch from "../../_components/SectionsWithSearch";
 import FigmaFilesTable from "../../_components/FigmaFilesTable";
 import ToolsTable from "../../_components/ToolsTable";
+import People from "../../_components/People";
+import ProductCloud from "../../_components/ProductCloud";
 import ToolkitDisclosure from "../../_components/ToolkitDisclosure";
 import ModuleSidebar from "../../_components/ModuleSidebar";
 import PageFade from "../../_components/PageFade";
+import NumberText from "../../_components/NumberText";
+import Table from "../../_components/Table";
+import Pie from "../../_components/Pie";
+import SummarizeFab from "../../_components/SummarizeFab";
+import { serializeModule } from "../../_lib/serializeModule";
 
 /** Any figma.com URL — design, file, prototype, or proto. */
 function isFigmaUrl(href: string): boolean {
@@ -92,7 +100,11 @@ export default async function ModulePage({
       <h1 className="h-title" style={{ marginTop: 12 }}>
         {m.title}
       </h1>
-      {m.summary && <p className="lead">{m.summary}</p>}
+      {m.summary && (
+        <p className="lead">
+          <NumberText>{m.summary}</NumberText>
+        </p>
+      )}
 
       {m.wip && (
         <div className="wip-banner" role="note">
@@ -105,6 +117,49 @@ export default async function ModulePage({
       )}
 
       <div style={{ marginTop: 32 }} />
+
+      {/* POD user research packs — picker UI in place of the
+          generic section loop. Renders the available packs as
+          designed cards; coming-soon PODs are flagged below. */}
+      {m.slug === "pod-research" && (
+        <div
+          style={{
+            marginTop: 32,
+            display: "flex",
+            flexDirection: "column",
+            gap: 14,
+          }}
+        >
+          {packs.map((p) => (
+            <Link
+              key={p.slug}
+              href={`/m/${p.slug}`}
+              className="plain pack-card"
+            >
+              <div className="pack-card-eyebrow">
+                <span className="dot" aria-hidden />
+                <span>{p.num}</span>
+                <span>·</span>
+                <span>{p.format}</span>
+              </div>
+              <h3 className="pack-card-title">{p.title}</h3>
+              {p.summary && (
+                <p className="pack-card-body">
+                  <NumberText>{p.summary}</NumberText>
+                </p>
+              )}
+              <span className="pack-card-cta">Open pack →</span>
+            </Link>
+          ))}
+          <p
+            className="muted"
+            style={{ marginTop: 8, fontSize: 13 }}
+          >
+            Storefront, Monetization, Cart &amp; Checkout, and Customer
+            POD packs are being written by their POD seniors.
+          </p>
+        </div>
+      )}
 
       {/* Modules with a libraries table get a page-wide live search
           (SectionsWithSearch is a client component). Everything else
@@ -124,7 +179,7 @@ export default async function ModulePage({
               <ToolkitDisclosure
                 key={s.heading}
                 heading={s.heading}
-                body={s.body}
+                body={s.body ?? ""}
                 tools={s.tools}
               />
             );
@@ -138,7 +193,7 @@ export default async function ModulePage({
               <CredentialsDisclosure
                 key={s.heading}
                 heading={s.heading}
-                body={s.body}
+                body={s.body ?? ""}
               />
             );
           }
@@ -147,7 +202,7 @@ export default async function ModulePage({
               <MotionToolsDisclosure
                 key={s.heading}
                 heading={s.heading}
-                body={s.body}
+                body={s.body ?? ""}
               />
             );
           }
@@ -156,74 +211,40 @@ export default async function ModulePage({
               <h2 className="h-sec" style={{ marginBottom: 10 }}>
                 {s.heading}
               </h2>
-              <p style={{ margin: 0 }}>{s.body}</p>
+              {s.body && (
+                <p style={{ margin: 0 }}>
+                  <NumberText>{s.body}</NumberText>
+                </p>
+              )}
+              {s.table && <Table data={s.table} />}
+              {s.pie && <Pie data={s.pie} />}
+              {s.people && s.people.length > 0 && (
+                <People people={s.people} />
+              )}
+              {s.products && s.products.length > 0 && (
+                <ProductCloud products={s.products} />
+              )}
               {s.tools && s.tools.length > 0 && (
                 <ToolsTable tools={s.tools} />
               )}
               {s.figmaFiles && s.figmaFiles.length > 0 && (
-                <FigmaFilesTable files={s.figmaFiles} />
+                <FigmaFilesTable
+                  files={s.figmaFiles}
+                  flat={s.flatFiles}
+                />
               )}
-              {s.video && (
-                <figure style={{ margin: "16px 0 0" }}>
-                  {/* iOS / Figma-style continuous-curvature corners
-                      (squircle) instead of CSS border-radius. Matches the
-                      noon-merged @ui/SmoothCorners treatment. */}
-                  <SmoothCorners
-                    radius={20}
-                    smoothing={0.6}
-                    style={{
-                      position: "relative",
-                      width: "100%",
-                      aspectRatio: "16 / 9",
-                      background: "#000",
-                    }}
-                  >
-                    {/* Direct video file (mp4/webm/mov) → <video> tag.
-                        Anything else (YouTube, Loom, etc.) → <iframe>.
-                        screen.studio's share URL refuses iframe embedding
-                        (X-Frame-Options + CSP frame-ancestors), so we
-                        self-host the underlying MP4 under /public/videos. */}
-                    {/\.(mp4|webm|mov|m4v)(\?|$)/i.test(s.video.url) ? (
-                      <video
-                        src={s.video.url}
-                        controls
-                        playsInline
-                        preload="metadata"
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "contain",
-                          background: "#000",
-                        }}
-                      />
-                    ) : (
-                      <iframe
-                        src={s.video.url}
-                        title={s.video.caption ?? s.heading}
-                        loading="lazy"
-                        allow="fullscreen; autoplay; clipboard-write; encrypted-media; picture-in-picture"
-                        allowFullScreen
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          width: "100%",
-                          height: "100%",
-                          border: 0,
-                        }}
-                      />
-                    )}
-                  </SmoothCorners>
-                  {s.video.caption && (
-                    <figcaption
-                      className="muted"
-                      style={{ fontSize: 12, marginTop: 8 }}
-                    >
-                      {s.video.caption}
-                    </figcaption>
-                  )}
-                </figure>
+              {/* Video: single (legacy `s.video`) or carousel (`s.videos`).
+                  Both feed into VideoCarousel; the tab row hides when there's
+                  only one clip. */}
+              {(s.videos?.length ?? 0) > 0 && (
+                <VideoCarousel clips={s.videos!} />
+              )}
+              {!s.videos && s.video && (
+                <VideoCarousel
+                  clips={[
+                    { url: s.video.url, caption: s.video.caption },
+                  ]}
+                />
               )}
             </div>
           );
@@ -478,6 +499,12 @@ export default async function ModulePage({
       <SiteFooter />
       </div>
       </PageFade>
+
+      {/* Experimental: AI summary FAB. Scoped to noon-one for now;
+          if it lands, drop the slug guard to enable everywhere. */}
+      {m.slug === "noon-one" && (
+        <SummarizeFab content={serializeModule(m)} title={m.title} />
+      )}
     </div>
   );
 }

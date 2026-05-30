@@ -19,8 +19,12 @@ function figmaFileUrl(key: string, name: string): string {
  */
 export default function FigmaFilesTable({
   files,
+  flat = false,
 }: {
   files: FigmaFile[];
+  /** When true, render as a single flat table (no POD grouping, no
+   *  search bar). Used by the dedicated Bar raisers section. */
+  flat?: boolean;
 }) {
   const [q, setQ] = useState("");
   const query = q.trim().toLowerCase();
@@ -98,6 +102,61 @@ export default function FigmaFilesTable({
     io.observe(el);
     return () => io.disconnect();
   }, []);
+
+  // Flat mode: no search, no POD grouping. Used by the dedicated
+  // "Bar raisers" section to render a tight summary table.
+  if (flat) {
+    return (
+      <div style={{ marginTop: 16 }}>
+        <div className="cred-wrap">
+          <table className="cred">
+            <tbody>
+              {files.map((f) => {
+                const href = figmaFileUrl(f.key, f.name);
+                return (
+                  <tr key={f.key}>
+                    <td className="k">
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="plain"
+                        style={{ color: "inherit" }}
+                      >
+                        {f.name}
+                        {f.barRaiser && (
+                          <span className="br-chip">Bar raiser</span>
+                        )}
+                      </a>
+                    </td>
+                    <td
+                      style={{
+                        textAlign: "right",
+                        whiteSpace: "nowrap",
+                        color: "var(--ub-fg-secondary)",
+                        width: "1%",
+                      }}
+                    >
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="plain"
+                        aria-label={`Open ${f.name} in Figma`}
+                        style={{ color: "inherit" }}
+                      >
+                        ↗
+                      </a>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ marginTop: 16 }}>
@@ -254,6 +313,9 @@ export default function FigmaFilesTable({
                               style={{ color: "inherit" }}
                             >
                               {f.name}
+                              {f.barRaiser && (
+                                <span className="br-chip">Bar raiser</span>
+                              )}
                             </a>
                           </td>
                           <td

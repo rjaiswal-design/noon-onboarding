@@ -28,8 +28,8 @@ export default function IndexPage() {
       <p style={{ marginTop: 16 }}>
         This is the first two weeks for any new designer here. Not a product
         tour, but enough context, language, exposure, and belonging to start
-        contributing with confidence by the end of week 2. Six ways of working,
-        five reference and culture sections, two principles.
+        contributing with confidence by the end of week 2. Six modules on how
+        we work, six on culture, seven values.
       </p>
 
       <Rule />
@@ -44,7 +44,7 @@ export default function IndexPage() {
             marginBottom: 14,
           }}
         >
-          <h2 className="h-sec">Ways of working</h2>
+          <h2 className="h-sec">How we work</h2>
           <span className="muted" style={{ fontSize: 12 }}>
             the basics
           </span>
@@ -78,7 +78,7 @@ export default function IndexPage() {
             marginBottom: 14,
           }}
         >
-          <h2 className="h-sec">Reference & culture</h2>
+          <h2 className="h-sec">Culture</h2>
           <span className="muted" style={{ fontSize: 12 }}>
             living
           </span>
@@ -97,27 +97,6 @@ export default function IndexPage() {
               </Link>
             ))}
           </StaggerList>
-        </div>
-      </section>
-
-      <Rule />
-
-      {/* secondary index */}
-      <section>
-        <h2 className="h-sec" style={{ marginBottom: 14 }}>
-          Also in here
-        </h2>
-        <div>
-          <Link href="/principles" className="mod-row">
-            <span className="mod-num">→</span>
-            <span className="mod-name">Two principles</span>
-            <span className="mod-when">why it’s built this way</span>
-          </Link>
-          <Link href="/workstreams" className="mod-row">
-            <span className="mod-num">→</span>
-            <span className="mod-name">Parallel workstreams</span>
-            <span className="mod-when">3 dependencies</span>
-          </Link>
         </div>
       </section>
 

@@ -288,6 +288,35 @@ body {
   color: var(--ub-accent);
 }
 
+/* Chevron chip — replaces the bare `[ + ]` indicator so the disclosure
+   reads as a real interactive control. The svg inside rotates 0° → 90°
+   when open (handled by the React component). */
+.disclosure-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--ub-bg-deep);
+  border: 1px solid var(--ub-border);
+  color: var(--ub-fg-mutedXX);
+  transition:
+    background 0.14s ease,
+    border-color 0.14s ease,
+    color 0.14s ease,
+    transform 0.14s ease;
+  flex-shrink: 0;
+}
+.disclosure:hover .disclosure-chevron {
+  background: var(--ub-accent-08);
+  border-color: var(--ub-accent-border);
+  color: var(--ub-accent);
+}
+.disclosure:active .disclosure-chevron {
+  transform: scale(0.94);
+}
+
 /* search input */
 .cred-search {
   width: 100%;
@@ -411,6 +440,370 @@ body {
   margin: 6px 0 0;
 }
 
+/* ── summarise FAB + sheet (experimental, noon-one page only) ── */
+
+.summarize-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  background: var(--ub-accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow:
+    0 6px 18px rgba(255, 88, 0, 0.32),
+    0 2px 6px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.summarize-fab:focus-visible {
+  outline: 2px solid var(--ub-accent);
+  outline-offset: 3px;
+}
+
+.summarize-sheet {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  width: 380px;
+  max-width: calc(100vw - 56px);
+  max-height: calc(100vh - 160px);
+  background: var(--ub-bg);
+  border: 1px solid var(--ub-border);
+  border-radius: 14px;
+  box-shadow:
+    0 24px 56px rgba(16, 22, 40, 0.16),
+    0 8px 18px rgba(16, 22, 40, 0.08);
+  z-index: 21;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform-origin: bottom right;
+}
+.summarize-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 12px 16px;
+  border-bottom: 1px solid var(--ub-border);
+  background: var(--ub-bg-deep);
+}
+.summarize-sheet-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ub-fg-strong);
+}
+.summarize-sheet-title svg {
+  width: 14px;
+  height: 14px;
+  color: var(--ub-accent);
+}
+.summarize-sheet-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ub-fg-mutedXX);
+  font-size: 20px;
+  line-height: 1;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.summarize-sheet-close:hover {
+  background: var(--ub-surface);
+  color: var(--ub-fg-strong);
+}
+.summarize-sheet-body {
+  padding: 16px 18px 18px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ub-fg);
+}
+.summarize-sheet-text {
+  white-space: pre-wrap;
+}
+.summarize-sheet-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ub-fg-mutedXX);
+  font-size: 13px;
+}
+.summarize-pulse {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--ub-accent);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1); }
+}
+.summarize-sheet-error {
+  color: #b00020;
+  font-size: 13px;
+  margin: 0;
+}
+.summarize-sheet-regen {
+  margin-top: 16px;
+  font-family: var(--ub-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ub-accent);
+  background: none;
+  border: 1px solid var(--ub-accent-border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.summarize-sheet-regen:hover {
+  background: var(--ub-accent-08);
+}
+
+@media (max-width: 720px) {
+  .summarize-sheet {
+    right: 16px;
+    bottom: 92px;
+    width: calc(100vw - 32px);
+  }
+  .summarize-fab {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+/* ── pack card — the entry point on POD user research packs ── */
+
+.pack-card {
+  display: block;
+  padding: 28px 28px 24px;
+  border: 1px solid var(--ub-border);
+  border-radius: 12px;
+  background: var(--ub-bg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ub-border) !important;
+  transition: border-color 0.16s ease, background 0.16s ease,
+    transform 0.16s ease;
+}
+.pack-card:hover {
+  border-color: var(--ub-accent-border) !important;
+  background: var(--ub-accent-08);
+  transform: translateY(-1px);
+}
+.pack-card-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ub-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ub-fg-mutedXX);
+  margin-bottom: 14px;
+}
+.pack-card-eyebrow .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--ub-accent);
+}
+.pack-card-title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--ub-fg-strong);
+  margin: 0 0 10px;
+  transition: color 0.12s ease;
+}
+.pack-card:hover .pack-card-title {
+  color: var(--ub-accent);
+}
+.pack-card-body {
+  margin: 0 0 18px;
+  color: var(--ub-fg-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.pack-card-cta {
+  display: inline-block;
+  color: var(--ub-accent);
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* ── video carousel — horizontal scroll for multi-clip sections ── */
+
+/* Author tabs sitting above the scroll row. Hairline pills; active
+   tab flips to a solid dark fill. Click-to-scroll routes to the
+   matching clip; the active state also auto-updates as the user
+   manually scrolls (IntersectionObserver in the component). */
+.video-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.video-tab {
+  font-family: var(--font-sf);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border: 1px solid var(--ub-border);
+  background: var(--ub-bg);
+  color: var(--ub-fg-mutedXX);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition:
+    color 0.14s ease,
+    background 0.14s ease,
+    border-color 0.14s ease;
+}
+.video-tab:hover {
+  color: var(--ub-accent);
+  border-color: var(--ub-accent-border);
+}
+.video-tab.is-active {
+  color: var(--ub-bg);
+  background: var(--ub-fg-strong);
+  border-color: var(--ub-fg-strong);
+}
+
+/* Wrapper exists purely to host the right-edge fade overlay. The
+   overlay is a pseudo-element with a left→right transparent→bg
+   gradient, sitting above the scroll on the right side so peeking
+   clips soft-blend into the page background instead of hard-cropping. */
+.video-scroll-wrap {
+  position: relative;
+}
+.video-scroll-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 16px; /* clears the scrollbar track underneath */
+  width: 64px;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    var(--ub-bg)
+  );
+}
+
+.video-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 10px;
+  /* Hide the scrollbar's chrome but keep functionality. The next
+     card's peek (~20% width) is the affordance that there's more. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--ub-border) transparent;
+}
+.video-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.video-scroll::-webkit-scrollbar-thumb {
+  background: var(--ub-border);
+  border-radius: 3px;
+}
+.video-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--ub-border-strong);
+}
+.video-scroll-item {
+  flex: 0 0 80%;
+  scroll-snap-align: start;
+}
+@media (max-width: 720px) {
+  .video-scroll-item {
+    flex-basis: 88%;
+  }
+}
+
+/* ── product cloud (taste.md) ─────────────────────────── */
+
+.product-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.product-chip {
+  display: inline-block;
+  padding: 4px 11px;
+  border: 1px solid var(--ub-border) !important;
+  border-radius: 9999px;
+  font-size: 13px;
+  line-height: 1.4;
+  background: var(--ub-bg);
+  color: var(--ub-fg-strong) !important;
+  text-decoration: none;
+  transition:
+    border-color 0.14s ease,
+    background 0.14s ease,
+    color 0.14s ease;
+}
+.product-chip:hover {
+  border-color: var(--ub-accent-border) !important;
+  background: var(--ub-accent-08);
+  color: var(--ub-accent) !important;
+}
+.product-chip--static {
+  color: var(--ub-fg-mutedXX) !important;
+  cursor: default;
+}
+.product-chip--static:hover {
+  border-color: var(--ub-border) !important;
+  background: var(--ub-bg);
+  color: var(--ub-fg-mutedXX) !important;
+}
+
+/* ── inline numeric chip ──────────────────────────────── */
+
+/* Any number in body / summary copy gets wrapped in <span class="num">.
+   Subtle accent-tinted chip with monospace digits — gives data a tactile
+   feel without screaming. Tabular-nums so the digits read evenly even
+   inside flowing prose. */
+.num {
+  display: inline-block;
+  font-family: var(--ub-font-mono);
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--ub-accent);
+  background: var(--ub-accent-08);
+  padding: 1px 6px;
+  margin: 0 1px;
+  border-radius: 4px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.num:hover {
+  background: var(--ub-accent-12);
+}
+
 /* ── WIP markers ──────────────────────────────────────── */
 
 /* Top-of-page banner shown on modules with `wip: true`. Uses the
@@ -441,6 +834,26 @@ body {
   border-radius: 9999px;
   background: var(--ub-bg);
   text-transform: uppercase;
+}
+
+/* Bar raiser chip — small inline marker beside a file name. Same
+   structural pattern as .wip-chip, different copy. Uses noon accent
+   so the row reads as "look here first" without shouting. */
+.br-chip {
+  display: inline-block;
+  margin-left: 8px;
+  font-family: var(--ub-font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ub-accent);
+  padding: 1px 5px;
+  border: 1px solid var(--ub-accent-border);
+  border-radius: 9999px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  line-height: 1.4;
+  background: var(--ub-accent-08);
 }
 
 /* Small inline chip used in the sidebar rail and on the index list
@@ -524,3 +937,19 @@ body {
 /* hmr nudge */
 
 /* hmr nudge */
+
+/* hmr */
+
+/* hmr */
+
+/* hmr */
+
+/* hmr */
+
+/* hmr */
+
+/* hmr */
+
+/* hmr */
+
+/* hmr */

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { credentials, devmode } from "./content";
 import Collapsible from "./_components/Collapsible";
+import DisclosureChevron from "./_components/DisclosureChevron";
 
 function Cell({ value, code, wrap }: { value: string; code?: boolean; wrap?: boolean }) {
   if (!value) return <td />;
@@ -92,7 +93,7 @@ export function CredentialsDisclosure({
         onClick={() => setOpen((o) => !o)}
       >
         <span className="h-sec">{heading}</span>
-        <span className="disclosure-ind">{open ? "[ − ]" : "[ + ]"}</span>
+        <DisclosureChevron open={open} />
       </button>
       <p style={{ margin: "8px 0 0" }}>{body}</p>
 
